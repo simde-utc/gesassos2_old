@@ -4,3 +4,6 @@ from fabric.api import *
 @roles('portail')
 def main():
   print("portail.main")
+  
+def add_portail(login):
+  print("Ajout sql dans la base du portail")
