@@ -1,22 +1,13 @@
 from fabric.api import *
-import random
-import string
 import MySQLdb
+import gen_mdp
 
 
 @task(default=True)
 @roles('mail')
 def main():
   print("mail.main")
-  
-def gen_mdp(length):
-	print("le generateur")
-	# 26 lettres majuscules + 26 lettres minuscules + 10 chiffres [0..9] = 62
-	letters = string.printable[:62]
-	password = ''
-	for ununsed_count in range(length):
-		password += letters[random.randint(0, len(letters) - 1)]
-	return password
+
 
 def add_mail(login):
   sudo('mkdir /mails/%s' % login)
