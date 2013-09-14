@@ -1,6 +1,6 @@
 from fabric.api import *
 import MySQLdb
-import gen_mdp
+import gen_mdp.py
 
 
 @task(default=True)
@@ -23,4 +23,3 @@ def add_assotous(login):
   c.execute("INSERT INTO mailman_mysql (listname, address, hide, nomail, ack, not_metoo, digest, plain, password, lang, name, one_last_digest, user_options, delivery_status, topics_userinterest, delivery_status_timestamp, bi_cookie, bi_score, bi_noticesleft, bi_lastnotice, bi_date) VALUES (‘asso-tous’, ‘$login@assos.utc.fr’, 'N', 'N', 'Y', 'Y', 'N', 'N', %s, 'fr', '', 'N', '264', '0', NULL, '0000-00-00 00:00:00', NULL, '0', '0', '0000-00-00', '0000-00-00')" % mdp)
   c.close()
   db.close()
-  
