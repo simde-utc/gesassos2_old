@@ -7,3 +7,5 @@ def main():
   
 def add_portail(login):
   print("Ajout sql dans la base du portail")
+  sudo('echo %s >> /root/assos.list' % (login))
+  sudo('/root/generate_vhost.sh')
