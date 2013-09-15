@@ -7,7 +7,6 @@ def main():
 
 def add_web(login):
   print("Ajout des fichiers de conf apache")
-  sudo('smbldap-useradd  -a -d /assos/%s -A1 %s' % (login, login))
   sudo('sed "s/LOGIN/%s/g" /root/modele.suphp > /etc/apache2/custom/%s.suphp' % (login,login))
   sudo('echo %s >> /root/assos.list' % (login))
   sudo('/root/generate_vhost.sh')
