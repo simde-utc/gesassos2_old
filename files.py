@@ -6,11 +6,10 @@ import gen_mdp
 def main():
   print("files.main")
   
-def add_user(login):
+def add_user(login, mdp1):
   env.host_string = 'files.mde.utc'
-  sudo('smbldap-useradd -a -d /assos/%s -A1 %s' % (login, login))
-  mdp = gen_mdp(8)
-  print("Suggested password: %s" mdp)
+  sudo('smbldap-useradd -a -d /assos/%s -A1 %s' % (login, login))  
+  print("Suggested password: %s" mdp1)
   sudo('smbpasswd %s' % login)
   sudo('mkdir -p /assos/%s' % login)
   sudo('mkdir -p /sites/%s' % login)
@@ -24,3 +23,7 @@ def add_user(login):
   sudo("echo \"<?php\nheader('Location: http://assos.utc.fr/asso/%s');\n?>\" > /sites/%s/index.php" % (login, login))
   sudo('chown %s /sites/%s/index.php' % (login, login))
   sudo('ln -s /sites/%s /assos/%s/public_html' % (login, login))
+
+def change_passwd(login, mdp):
+  print("Suggested password: %s" mdp)
+  sudo('smbpasswd %s' % login)

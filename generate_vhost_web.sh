@@ -1,4 +1,4 @@
- while read -r line
+while read -r line
 do
 
 # Pool php-fpm

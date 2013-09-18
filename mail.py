@@ -17,9 +17,21 @@ def add_mail(login):
 def add_assotous(login):  
   print("connexion a la bdd mailman")
   mdp = gen_mdp(8)
-  db=MySQLdb.connect(user="gesassos", passwd="",db="mailman")
+  db=MySQLdb.connect(user=env.config.mysql.username, passwd=env.config.mysql.password,db="mailman") #ajouter hostname
   c=db.cursor()
   print("ajout dans la bdd mailman")
   c.execute("INSERT INTO mailman_mysql (listname, address, hide, nomail, ack, not_metoo, digest, plain, password, lang, name, one_last_digest, user_options, delivery_status, topics_userinterest, delivery_status_timestamp, bi_cookie, bi_score, bi_noticesleft, bi_lastnotice, bi_date) VALUES (‘asso-tous’, ‘$login@assos.utc.fr’, 'N', 'N', 'Y', 'Y', 'N', 'N', %s, 'fr', '', 'N', '264', '0', NULL, '0000-00-00 00:00:00', NULL, '0', '0', '0000-00-00', '0000-00-00')" % mdp)
   c.close()
   db.close()
+
+def howto_signup(president):
+  print("envoi du mail au président pour lui dire d'aller signer la charte")
+
+def send_passwords(login, president, mdp1, mdp2):
+  print('Envoi des passwords au président de l\'asso')
+
+def send_new_password_asso(login, president, mdp):
+  print('Envoi du nouveau password asso au président de l\'asso')
+
+def send_new_password_sql(login, president, mdp):
+  print('Envoi du nouveau password sql au président de l\'asso')

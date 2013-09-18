@@ -12,5 +12,5 @@ def add_web(login):
   sudo('/root/generate_vhost_web.sh')
 
   
-def activer_web(login):
-  print("a2ensite et reload") # a faire
+#def activer_web(login):
+ # print("a2ensite et reload") # déjà intégré dans le generate_vhost_web

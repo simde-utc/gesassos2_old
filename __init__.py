@@ -28,14 +28,32 @@ def precreate_asso(login, president):
 def create_asso(login, president):
   confirm("Did the president signup the charter ?",False)
   confirm("Are you sure the asso does not exist already ?", False)
-  files.add_user(login)
+  mdp1 = gen_mdp(8)
+  mdp2 = gen_mdp(8)
+  files.add_user(login, mdp1)
   mail.add_mail(login)
   mail.add_assotous(login)
   web.add_web(login)
   portail.add_portail(login)
-  sql.add_sql(login)
-  mail.send_passwords(login, president)
+  sql.add_sql(login, mdp2)
+  mail.send_passwords(login, president, mdp1, mdp2)
   
+@task
+@runs_once
+def change_password_asso(login, president):
+  confirm("Did the president signup the charter ?",False)
+  mdp = gen_mdp(8)
+  files.change_passwd(login, mdp)
+  mail.send_new_password_asso(login, president, mdp)
+
+@task
+@runs_once
+def change_password_mysql(login, president):
+  confirm("Did the president signup the charter ?",False)
+  mdp = gen_mdp(8)
+  sql.change_passwd(login, mdp)
+  mail.send_new_password_sql(login, president, mdp)
+
 
 @task
 @runs_once
