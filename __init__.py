@@ -18,4 +18,9 @@ env.roledefs = {
 def main():
   print("Run 'fab list' to see all commands")
 
-
+@task
+@runs_once
+def create_asso(login):
+  files.add_user(login)
+  mail.add_mail(login)
+  mail.add_assotous(login)

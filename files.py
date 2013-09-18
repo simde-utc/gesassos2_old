@@ -1,4 +1,5 @@
 from fabric.api import *
+import gen_mdp
 
 @task(default=True)
 @roles('files')
@@ -7,10 +8,13 @@ def main():
   
 def add_user(login):
   env.host_string = 'files.mde.utc'
-  sudo('smbldap-useradd  -a -d /assos/%s -A1 %s' % (login, login))
-  sudo('mkdir /assos/%s' % login)
-  sudo('mkdir /sites/%s' % login)
-  sudo('mkdir /sites/sessions/%s' % login)
+  sudo('smbldap-useradd -a -d /assos/%s -A1 %s' % (login, login))
+  mdp = gen_mdp(8)
+  print("Suggested password: %s" mdp)
+  sudo('smbpasswd %s' % login)
+  sudo('mkdir -p /assos/%s' % login)
+  sudo('mkdir -p /sites/%s' % login)
+  sudo('mkdir -p /sites/sessions/%s' % login)
   sudo('chown -R %s:"Domain Users" /assos/%s' % (login, login))
   sudo('chown -R %s:web /sites/%s' % (login, login))
   sudo('chown -R %s:web /sites/sessions/%s' % (login, login))
