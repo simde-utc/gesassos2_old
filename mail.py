@@ -1,6 +1,6 @@
 from fabric.api import *
 import MySQLdb
-import gen_mdp.py
+import gen_mdp
 
 
 @task(default=True)
