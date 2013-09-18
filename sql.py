@@ -7,7 +7,7 @@ import gen_mdp.py
 def main():
   print("sql.main") 
 
-def add_sql(login, password):
+def add_sql(login):
   print("generation mot de passse et appel de la procedure")
   mdp = gen_mdp(8)
   print("connexion a la bdd gesassos")
