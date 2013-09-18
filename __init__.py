@@ -27,14 +27,15 @@ def precreate_asso(login, president):
 @runs_once
 def create_asso(login, president):
   confirm("Did the president signup the charter ?",False)
+  confirm("Are you sure the asso does not exist already ?", False)
   files.add_user(login)
   mail.add_mail(login)
   mail.add_assotous(login)
   web.add_web(login)
+  portail.add_portail(login)
   sql.add_sql(login)
   mail.send_passwords(login, president)
-  local('generate_vhost_web.sh')
-  local('generate_vhost_portail.sh')
+  
 
 @task
 @runs_once

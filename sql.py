@@ -11,7 +11,7 @@ def add_sql(login):
   print("generation mot de passse et appel de la procedure")
   mdp = gen_mdp(8)
   print("connexion a la bdd gesassos")
-  db=MySQLdb.connect(user="gesassos", passwd="",db="gesassos")
+  db=MySQLdb.connect(user=env.config.mysql.username, passwd=env.config.mysql.password,db="gesassos")
   c=db.cursor()
   c.execute("CALL createUser('%s','%s')" % (login, mdp))
   c.close()
@@ -21,3 +21,8 @@ def add_sql(login):
   c.execute("CREATE DATABASE %s " % login)
   c.close()
   db.close()
+
+def add_to_portal(login):
+  print("Ajout à la base du portail")
+  db=MySQLdb.connect(user=env.config.mysql.username, passwd=env.config.mysql.password,db="gesassos")
+
