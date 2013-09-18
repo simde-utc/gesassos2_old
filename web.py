@@ -8,74 +8,10 @@ def main():
 def add_web(login):
   print("Ajout des fichiers de conf apache")
   sudo('sed "s/LOGIN/%s/g" /root/modele.suphp > /etc/apache2/custom/%s.suphp' % (login,login))
-  sudo('echo %s >> /root/assos.list' % (login)) // a revoir si un seul fichier sur le serveur, créer un autre .py ?
-  //sudo('/root/generate_vhost.sh')
-
-  while read -r line
-do
-
-# Pool php-fpm
-cat > /etc/php5/fpm/pool.d/${line}.conf <<EOF
-[${line}]
-user = ${line}
-group = web
-listen = /var/run/php-fpm-${line}.sock
-pm = ondemand
-pm.max_children = 5
-pm.process_idle_timeout = 10s
-chroot=
-chdir = /
-php_value[session.save_path] = /sites/sessions/${line}
-php_value[disable_functions] = shell_exec
-php_value[session.cookie_path] = /${line}
-include=/etc/php5/fpm/pool.d/custom/${line}.conf
-EOF
-
-# Config apache
-cat > /etc/apache2/sites-available/${line} <<EOF
-Include /etc/apache2/custom/${line}
-Alias /${line} /sites/${line}
-Alias /php5-${line}.fastcgi /var/lib/apache2/fastcgi/php5-${line}.fastcgi
-FastCGIExternalServer /var/lib/apache2/fastcgi/php5-${line}.fastcgi -socket /va$
-Action php-script-${line} /php5-${line}.fastcgi
-<Directory /sites/${line}>
-  AddHandler php-script-${line} .php
-  Options FollowSymLinks
-  AllowOverride All
-  Order allow,deny
-  Allow from all
-  Include /etc/apache2/custom/${line}.directory
-</Directory>
-EOF
-
-# Creation des fichiers de config custom
-touch /etc/apache2/custom/${line}.directory
-touch /etc/apache2/custom/${line}
-touch /etc/php5/fpm/pool.d/custom/${line}.conf
-
-# Modification pour appliquer la config de custom
-if [ $( grep disable_functions /etc/php5/fpm/pool.d/custom/${line}.conf | grep $
-then
-sed -i '/disable_functions/d' /etc/php5/fpm/pool.d/${line}.conf
-fi
-
-# Creation du dossier pour les sessions
-mkdir -p /sites/sessions/${line}
-chown ${line}.web /sites/sessions/${line}
-chmod 2750 /sites/sessions/${line}
-
-# Activation de l'alias
-a2ensite ${line}
-
-done < "/root/assos.list"
-
-# reload php-fpm
-service php5-fpm reload
-
-# reload apache2
-service apache2 reload
+  sudo('echo %s >> /root/assos.list' % (login))
+  #sudo('/root/generate_vhost.sh')
 
 
   
 def activer_web(login):
-  print("a2ensite et reload") // actuellement dans le generate_vhost
+  print("a2ensite et reload")
