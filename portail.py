@@ -7,8 +7,8 @@ def main():
   
 def add_portail(login):
   print("Ajout sql dans la base du portail")
-  sudo('echo %s >> /root/assos.list' % (login)) // a revoir si un seul fichier sur le serveur, créer un autre .py ?
-  //sudo('/root/generate_vhost.sh')
+  sudo('echo %s >> /root/assos.list' % (login))
+  sudo('/root/generate_vhost_portail.sh')
 
 
 

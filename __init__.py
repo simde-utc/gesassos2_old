@@ -33,4 +33,12 @@ def create_asso(login, president):
   web.add_web(login)
   sql.add_sql(login)
   mail.send_passwords(login, president)
+  local('generate_vhost_web.sh')
+  local('generate_vhost_portail.sh')
+
+@task
+@runs_once
+def install_modif_ generate_vhost():
+  put('generate_vhost_web.sh', '/root/generate_vhost_web.sh', True)
+  put('generate_vhost_portail.sh', '/root/generate_vhost_portail.sh', True)
 
