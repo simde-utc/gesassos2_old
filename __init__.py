@@ -1,6 +1,7 @@
 from fabric.contrib.console import confirm
 
 import files, web, portail, mail, sql
+import config
 
 env.use_ssh_config = True
 env.roledefs = {
