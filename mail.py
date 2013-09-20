@@ -1,6 +1,7 @@
 from fabric.api import *
 import MySQLdb
 import gen_mdp
+import send_email
 
 
 @task(default=True)
@@ -26,12 +27,72 @@ def add_assotous(login):
 
 def howto_signup(president):
   print("envoi du mail au président pour lui dire d'aller signer la charte")
+  to = president + "@etu.utc.fr"
+  msg = """From: Simde <simde@assos.utc.fr>
+To: <""" + to + """>
+Subject: Signature de la charte
 
-def send_passwords(login, president, mdp1, mdp2):
+Le compte de votre asso a été précré, veuillez signer la charte en suivant la procédure suivante
+http://assos.utc.fr/simde/wiki/signaturecharte
+
+Une fois cela fait envoyé nous un mail pour que nous puissions valider et finir la création du compte
+
+Bonne journée
+"""
+  send_email("simde@assos.utc.fr", to, msg)
+
+def send_passwords(president, mdp1, mdp2):
   print('Envoi des passwords au président de l\'asso')
+  to = president + "@etu.utc.fr"
+  msg = """From: Simde <simde@assos.utc.fr>
+To: <""" + to + """>
+Subject: Passwords du nouveau compte asso
 
-def send_new_password_asso(login, president, mdp):
+Le compte de votre asso a été créé.
+
+Voici les mots de passe associés :
+ - compte asso : """ + mdp1 + """
+ - base de donnée sql : """ + mdp2 + """
+
+Pour toute question n'hésitez pas à consulter le wiki du simde :
+http://assos.utc.fr/simde/wiki/accueil
+
+Bonne journée
+"""
+  send_email("simde@assos.utc.fr", to, msg)
+
+def send_new_password_asso(president, mdp):
   print('Envoi du nouveau password asso au président de l\'asso')
+  to = president + "@etu.utc.fr"
+  msg = """From: Simde <simde@assos.utc.fr>
+To: <""" + to + """>
+Subject: Changement du password du compte asso
 
-def send_new_password_sql(login, president, mdp):
+Le mot de passe du compte asso a été changé.
+
+Voici le nouveau mot de passe : """ + mdp + """
+
+Pour toute question n'hésitez pas à consulter le wiki du simde :
+http://assos.utc.fr/simde/wiki/accueil
+
+Bonne journée
+"""
+  send_email("simde@assos.utc.fr", to, msg)
+
+def send_new_password_sql(president, mdp):
   print('Envoi du nouveau password sql au président de l\'asso')
+  to = president + "@etu.utc.fr"
+  msg = """From: Simde <simde@assos.utc.fr>
+To: <""" + to + """>
+Subject: Changement du password de la base de donnée
+
+Le mot de passe de la base de donnée a été changé.
+
+Voici le nouveau mot de passe : """ + mdp + """
+
+Pour toute question n'hésitez pas à consulter le wiki du simde :
+http://assos.utc.fr/simde/wiki/accueil
+
+Bonne journée
+"""
+  send_email("simde@assos.utc.fr", to, msg)
