@@ -8,7 +8,7 @@ def main():
   print("sql.main") 
 
 def add_sql(login, mdp2):
-  print("connexion a la bdd gesassos")
+  print("connexion au compte gesassos et création du nouveau User")
   db=MySQLdb.connect(user=env.config.mysql.username, passwd=env.config.mysql.password,db="") # hostname et db à completer
   c=db.cursor()
   c.execute("CALL createUser('%s','%s')" % (login, mdp2))
@@ -31,4 +31,10 @@ def add_to_portal(login):
 
 def change_passwd(login, mdp):
   print("Changement du mot de passe de la bdd de l'asso")
+  db=MySQLdb.connect(user=env.config.mysql.username, passwd=env.config.mysql.password,db="") #ajouter hostname et db
+  c=db.cursor()
+  print("changement du password sql de l'asso")
+  c.execute("CALL changePassword(%s, %s)" % (login, mdp))
+  c.close()
+  db.close()
 
