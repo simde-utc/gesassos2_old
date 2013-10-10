@@ -54,7 +54,7 @@ Voici les mots de passe associes :
  - compte asso : """ + mdp1 + """
  - base de donnee sql : """ + mdp2 + """
 
-Pour toute question n'hesitez pas à consulter le wiki du simde :
+Pour toute question n'hesitez pas a consulter le wiki du simde :
 http://assos.utc.fr/simde/wiki/accueil
 
 Bonne journee
@@ -72,7 +72,7 @@ Le mot de passe du compte asso a ete change.
 
 Voici le nouveau mot de passe : """ + mdp + """
 
-Pour toute question n'hesitez pas à consulter le wiki du simde :
+Pour toute question n'hesitez pas a consulter le wiki du simde :
 http://assos.utc.fr/simde/wiki/accueil
 
 Bonne journee
@@ -90,7 +90,7 @@ Le mot de passe de la base de donnee a ete change.
 
 Voici le nouveau mot de passe : """ + mdp + """
 
-Pour toute question n'hesitez pas à consulter le wiki du simde :
+Pour toute question n'hesitez pas a consulter le wiki du simde :
 http://assos.utc.fr/simde/wiki/accueil
 
 Bonne journee
