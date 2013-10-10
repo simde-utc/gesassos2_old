@@ -26,73 +26,73 @@ def add_assotous(login):
   db.close()
 
 def howto_signup(president):
-  print("envoi du mail au président pour lui dire d'aller signer la charte")
+  print("envoi du mail au president pour lui dire d'aller signer la charte")
   to = president + "@etu.utc.fr"
   msg = """From: Simde <simde@assos.utc.fr>
 To: <""" + to + """>
 Subject: Signature de la charte
 
-Le compte de votre asso a été précré, veuillez signer la charte en suivant la procédure suivante
+Le compte de votre asso a ete precre, veuillez signer la charte en suivant la procedure suivante
 http://assos.utc.fr/simde/wiki/signaturecharte
 
-Une fois cela fait envoyé nous un mail pour que nous puissions valider et finir la création du compte
+Une fois cela fait envoye nous un mail pour que nous puissions valider et finir la creation du compte
 
-Bonne journée
+Bonne journee
 """
   send_email("simde@assos.utc.fr", to, msg)
 
 def send_passwords(president, mdp1, mdp2):
-  print('Envoi des passwords au président de l\'asso')
+  print('Envoi des passwords au president de l\'asso')
   to = president + "@etu.utc.fr"
   msg = """From: Simde <simde@assos.utc.fr>
 To: <""" + to + """>
 Subject: Passwords du nouveau compte asso
 
-Le compte de votre asso a été créé.
+Le compte de votre asso a ete cree.
 
-Voici les mots de passe associés :
+Voici les mots de passe associes :
  - compte asso : """ + mdp1 + """
- - base de donnée sql : """ + mdp2 + """
+ - base de donnee sql : """ + mdp2 + """
 
-Pour toute question n'hésitez pas à consulter le wiki du simde :
+Pour toute question n'hesitez pas à consulter le wiki du simde :
 http://assos.utc.fr/simde/wiki/accueil
 
-Bonne journée
+Bonne journee
 """
   send_email("simde@assos.utc.fr", to, msg)
 
 def send_new_password_asso(president, mdp):
-  print('Envoi du nouveau password asso au président de l\'asso')
+  print('Envoi du nouveau password asso au president de l\'asso')
   to = president + "@etu.utc.fr"
   msg = """From: Simde <simde@assos.utc.fr>
 To: <""" + to + """>
 Subject: Changement du password du compte asso
 
-Le mot de passe du compte asso a été changé.
+Le mot de passe du compte asso a ete change.
 
 Voici le nouveau mot de passe : """ + mdp + """
 
-Pour toute question n'hésitez pas à consulter le wiki du simde :
+Pour toute question n'hesitez pas à consulter le wiki du simde :
 http://assos.utc.fr/simde/wiki/accueil
 
-Bonne journée
+Bonne journee
 """
   send_email("simde@assos.utc.fr", to, msg)
 
 def send_new_password_sql(president, mdp):
-  print('Envoi du nouveau password sql au président de l\'asso')
+  print('Envoi du nouveau password sql au president de l\'asso')
   to = president + "@etu.utc.fr"
   msg = """From: Simde <simde@assos.utc.fr>
 To: <""" + to + """>
-Subject: Changement du password de la base de donnée
+Subject: Changement du password de la base de donnee
 
-Le mot de passe de la base de donnée a été changé.
+Le mot de passe de la base de donnee a ete change.
 
 Voici le nouveau mot de passe : """ + mdp + """
 
-Pour toute question n'hésitez pas à consulter le wiki du simde :
+Pour toute question n'hesitez pas à consulter le wiki du simde :
 http://assos.utc.fr/simde/wiki/accueil
 
-Bonne journée
+Bonne journee
 """
   send_email("simde@assos.utc.fr", to, msg)
