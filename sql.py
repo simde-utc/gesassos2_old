@@ -8,8 +8,8 @@ def main():
   print("sql.main") 
 
 def add_sql(login, mdp2):
-  print("connexion au compte gesassos et création du nouveau User")
-  db=MySQLdb.connect(user=env.config.mysql.username, passwd=env.config.mysql.password,db="") # hostname et db à completer
+  print("connexion au compte gesassos et creation du nouveau User")
+  db=MySQLdb.connect(user=env.config.mysql.username, passwd=env.config.mysql.password,db="") # hostname et db a completer
   c=db.cursor()
   c.execute("CALL createUser('%s','%s')" % (login, mdp2))
   c.close()
@@ -21,11 +21,11 @@ def add_sql(login, mdp2):
   db.close()
 
 def add_to_portal(login):
-  print("Ajout à la base du portail")
+  print("Ajout a la base du portail")
   db=MySQLdb.connect(user=env.config.mysql.username, passwd=env.config.mysql.password,db="portail") #ajouter hostname
   c=db.cursor()
   print("ajout dans la bdd du portail")
-  c.execute("INSERT INTO asso (login, active) values (%s, 1)" % (login)) #nécessaire le created at ? remplit automatiquement par sql à la creation de l'entrée ?
+  c.execute("INSERT INTO asso (login, active) values (%s, 1)" % (login)) #necessaire le created at ? remplit automatiquement par sql a la creation de l'entree ?
   c.close()
   db.close()
 
