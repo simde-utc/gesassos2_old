@@ -9,7 +9,7 @@ def main():
 def add_user(login, mdp1):
   env.host_string = 'files.mde.utc'
   sudo('smbldap-useradd -a -d /assos/%s -A1 %s' % (login, login))  
-  print("Suggested password: %s" mdp1)
+  print("Suggested password: %s" % mdp1)
   sudo('smbpasswd %s' % login)
   sudo('mkdir -p /assos/%s' % login)
   sudo('mkdir -p /sites/%s' % login)
