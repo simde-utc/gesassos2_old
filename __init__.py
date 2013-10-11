@@ -57,7 +57,7 @@ def change_password_mysql(login, president):
 
 @task
 @runs_once
-def install_modif_ generate_vhost():
+def install_modif_generate_vhost():
   put('generate_vhost_web.sh', '/root/generate_vhost_web.sh', True)
   put('generate_vhost_portail.sh', '/root/generate_vhost_portail.sh', True)
 
