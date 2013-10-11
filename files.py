@@ -25,5 +25,5 @@ def add_user(login, mdp1):
   sudo('ln -s /sites/%s /assos/%s/public_html' % (login, login))
 
 def change_passwd(login, mdp):
-  print("Suggested password: %s" mdp)
+  print("Suggested password: %s" % mdp)
   sudo('smbpasswd %s' % login)
