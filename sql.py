@@ -9,7 +9,7 @@ def main():
 
 def add_sql(login, mdp2):
   print("connexion au compte gesassos et creation du nouveau User")
-  db=MySQLdb.connect(user=env.config.mysql.username, passwd=env.config.mysql.password,db="") # hostname et db a completer
+  db=MySQLdb.connect(host=env.config.mysql.host, user=env.config.mysql.username, passwd=env.config.mysql.password,db="")
   c=db.cursor()
   c.execute("CALL createUser('%s','%s')" % (login, mdp2))
   c.close()
@@ -22,7 +22,7 @@ def add_sql(login, mdp2):
 
 def add_to_portal(login):
   print("Ajout a la base du portail")
-  db=MySQLdb.connect(user=env.config.mysql.username, passwd=env.config.mysql.password,db="portail") #ajouter hostname
+  db=MySQLdb.connect(host=env.config.mysql.host, user=env.config.mysql.username, passwd=env.config.mysql.password,db="portail")
   c=db.cursor()
   print("ajout dans la bdd du portail")
   c.execute("INSERT INTO asso (login, active) values (%s, 1)" % (login)) #necessaire le created at ? remplit automatiquement par sql a la creation de l'entree ?
@@ -31,7 +31,7 @@ def add_to_portal(login):
 
 def change_passwd(login, mdp):
   print("Changement du mot de passe de la bdd de l'asso")
-  db=MySQLdb.connect(user=env.config.mysql.username, passwd=env.config.mysql.password,db="") #ajouter hostname et db
+  db=MySQLdb.connect(host=env.config.mysql.host, user=env.config.mysql.username, passwd=env.config.mysql.password,db="") #ajouter db
   c=db.cursor()
   print("changement du password sql de l'asso")
   c.execute("CALL changePassword(%s, %s)" % (login, mdp))
