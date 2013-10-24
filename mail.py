@@ -39,7 +39,7 @@ Une fois cela fait envoye nous un mail pour que nous puissions valider et finir 
 
 Bonne journee
 """
-  send_email("simde@assos.utc.fr", to, msg)
+  send_email.send_email("simde@assos.utc.fr", to, msg)
 
 def send_passwords(president, mdp1, mdp2):
   print('Envoi des passwords au president de l\'asso')
@@ -59,7 +59,7 @@ http://assos.utc.fr/simde/wiki/accueil
 
 Bonne journee
 """
-  send_email("simde@assos.utc.fr", to, msg)
+  send_email.send_email("simde@assos.utc.fr", to, msg)
 
 def send_new_password_asso(president, mdp):
   print('Envoi du nouveau password asso au president de l\'asso')
@@ -77,7 +77,7 @@ http://assos.utc.fr/simde/wiki/accueil
 
 Bonne journee
 """
-  send_email("simde@assos.utc.fr", to, msg)
+  send_email.send_email("simde@assos.utc.fr", to, msg)
 
 def send_new_password_sql(president, mdp):
   print('Envoi du nouveau password sql au president de l\'asso')
@@ -95,4 +95,4 @@ http://assos.utc.fr/simde/wiki/accueil
 
 Bonne journee
 """
-  send_email("simde@assos.utc.fr", to, msg)
+  send_email.send_email("simde@assos.utc.fr", to, msg)
