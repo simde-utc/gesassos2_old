@@ -14,7 +14,6 @@ pm.process_idle_timeout = 10s
 chroot=
 chdir = /
 php_value[session.save_path] = /sites/sessions/${line}
-php_value[disable_functions] = shell_exec
 php_value[session.cookie_path] = /${line}
 include=/etc/php5/fpm/pool.d/custom/${line}.conf
 EOF
@@ -40,12 +39,6 @@ EOF
 touch /etc/apache2/custom/${line}.directory
 touch /etc/apache2/custom/${line}
 touch /etc/php5/fpm/pool.d/custom/${line}.conf
-
-# On retire la config disable_functions s'il y en a un dans le custom
-if [ $( grep disable_functions /etc/php5/fpm/pool.d/custom/${line}.conf | grep -v "^#" | wc -l ) != 0 ]
-then
-sed -i '/disable_functions/d' /etc/php5/fpm/pool.d/${line}.conf
-fi
 
 # Creation du dossier pour les sessions
 mkdir -p /sites/sessions/${line}
