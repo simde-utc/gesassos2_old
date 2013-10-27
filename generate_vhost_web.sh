@@ -1,3 +1,4 @@
+#!/bin/bash
 while read -r line
 do
 
@@ -23,7 +24,7 @@ cat > /etc/apache2/sites-available/${line} <<EOF
 Include /etc/apache2/custom/${line}
 Alias /${line} /sites/${line}
 Alias /php5-${line}.fastcgi /var/lib/apache2/fastcgi/php5-${line}.fastcgi
-FastCGIExternalServer /var/lib/apache2/fastcgi/php5-${line}.fastcgi -socket /va$
+FastCGIExternalServer /var/lib/apache2/fastcgi/php5-${line}.fastcgi -socket /var/run/php-fpm-${line}.sock -idle-timeout 60
 Action php-script-${line} /php5-${line}.fastcgi
 <Directory /sites/${line}>
   AddHandler php-script-${line} .php
@@ -40,8 +41,8 @@ touch /etc/apache2/custom/${line}.directory
 touch /etc/apache2/custom/${line}
 touch /etc/php5/fpm/pool.d/custom/${line}.conf
 
-# Modification pour appliquer la config de custom
-if [ $( grep disable_functions /etc/php5/fpm/pool.d/custom/${line}.conf | grep $
+# On retire la config disable_functions s'il y en a un dans le custom
+if [ $( grep disable_functions /etc/php5/fpm/pool.d/custom/${line}.conf | grep -v "^#" | wc -l ) != 0 ]
 then
 sed -i '/disable_functions/d' /etc/php5/fpm/pool.d/${line}.conf
 fi
