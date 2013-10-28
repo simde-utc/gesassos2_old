@@ -31,7 +31,7 @@ def add_to_portal(login):
   c.execute("SELECT pole.id, asso.name FROM pole INNER JOIN asso ON asso.id = pole.asso_id")
   num_pole = input("Entrez le numero du pole de l'asso a creer : ")
   name = raw_input("Entrez le nom de l'asso pour le portail : ")
-  c.execute("INSERT INTO asso (name, login, pole_id, active, created_at, updated_at) values (%s, %s, %d, 1, NOW(), NOW())" % (name, login, num_pole)) #necessaire le created at ? remplit automatiquement par sql a la creation de l'entree ?
+  #c.execute("INSERT INTO asso (name, login, pole_id, active, created_at, updated_at) values (%s, %s, %d, 1, NOW(), NOW())" % (name, login, num_pole)) #necessaire le created at ? remplit automatiquement par sql a la creation de l'entree ?
   c.close()
   db.close()
 

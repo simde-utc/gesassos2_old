@@ -64,3 +64,8 @@ def install_modif_generate_vhost():
   put('generate_vhost_web.sh', '/root/generate_vhost_web.sh', True)
   put('generate_vhost_portail.sh', '/root/generate_vhost_portail.sh', True)
 
+@task
+@runs_once
+def test(login, president):
+  sql.add_to_portal(login)
+
