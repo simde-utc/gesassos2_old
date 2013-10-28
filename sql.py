@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from fabric.api import *
 import MySQLdb
 import gen_mdp
