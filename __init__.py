@@ -66,6 +66,6 @@ def install_modif_generate_vhost():
 
 @task
 @runs_once
-def test(login, president):
+def test(login):
   sql.add_to_portal(login)
 
