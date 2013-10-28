@@ -1,5 +1,3 @@
-from fabric.api import *
-
 import smtplib
 
 def send_email(sender, receiver, message):	

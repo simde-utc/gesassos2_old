@@ -25,7 +25,7 @@ def add_user(login, mdp1):
   sudo('chmod 2750 -R /sites/sessions/%s' % login)
   sudo("echo \"<?php\nheader('Location: http://assos.utc.fr/asso/%s');\n?>\" > /sites/%s/index.php" % (login, login))
   sudo('chown %s:web /sites/%s/index.php' % (login, login))
-  sudo('chmod 2750 /sites/%s/index.php' % login)
+  sudo('chmod 0640 /sites/%s/index.php' % login)
   sudo('ln -s /sites/%s /assos/%s/public_html' % (login, login))
 
 def change_passwd(login, mdp):
