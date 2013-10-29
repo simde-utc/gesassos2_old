@@ -33,6 +33,7 @@ def add_to_portal(login):
   num_pole = input("Entrez le numero du pole de l'asso a creer : ")
   nom_asso = raw_input("Entrez le nom de l'asso pour le portail : ")
   c.execute("INSERT INTO asso (name, login, pole_id, active, created_at, updated_at) values ('%s', '%s', '%d', 1, NOW(), NOW())" % (nom_asso, login, num_pole))
+  db.commit()
   c.close()
   db.close()
 
