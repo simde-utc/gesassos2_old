@@ -15,11 +15,13 @@ def add_sql(login, mdp2):
   c=db.cursor()
   #c.execute("CALL createUser('%s','%s')" % (login, mdp2))
   c.execute("DELIMITER $$ CREATE PROCEDURE `createUser`(in varLogin char(16), in varPassword char(64) ) SQL SECURITY DEFINER BEGIN  # Ajout du user INSERT INTO mysql.user (Host, User, Password) VALUES('%.mde.utc', %s, PASSWORD(%s)); INSERT INTO mysql.db (Host, Db , User , Select_priv , Insert_priv , Update_priv , Delete_priv , Create_priv , Drop_priv , Grant_priv , References_priv , Index_priv , Alter_priv , Create_tmp_table_priv , Lock_tables_priv , Create_view_priv , Show_view_priv , Create_routine_priv , Alter_routine_priv , Execute_priv , Event_priv , Trigger_priv ) VALUES ('%.mde.utc', %s, %s ,'Y','Y','Y','Y','Y','Y','N','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y'); FLUSH PRIVILEGES; END$$ DELIMITER ;" % (login, mdp2, login, mdp2))
+  db.commit()
   c.close()
   db.close()
   db=MySQLdb.connect(host=env.config.mysql.host, user=login, passwd=mdp2)
   c=db.cursor()
   c.execute("CREATE DATABASE %s " % login)
+  db.commit()
   c.close()
   db.close()
 
@@ -44,6 +46,7 @@ def change_passwd(login, mdp):
   print("changement du password sql de l'asso")
   #c.execute("CALL changePassword(%s, %s)" % (login, mdp))
   c.execute("DELIMITER $$ CREATE PROCEDURE `changePassword`(in varLogin char(16), in varPassword char(64) ) SQL SECURITY DEFINER BEGIN UPDATE mysql.user SET Password = PASSWORD(%s) WHERE Host LIKE '%.mde.utc' AND User LIKE %s; FLUSH PRIVILEGES; END$$ DELIMITER ;" % (mdp, login))
+  db.commit()
   c.close()
   db.close()
 
