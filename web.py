@@ -5,10 +5,10 @@ from fabric.api import *
 def main():
   print("web.main")
 
-def add_web(login):
+def add_web(login_asso):
   print("Ajout des fichiers de conf apache")
-  sudo('sed "s/LOGIN/%s/g" /root/modele.suphp > /etc/apache2/custom/%s.suphp' % (login,login))
-  sudo('echo %s >> /root/assos.list' % (login))
+  sudo('sed "s/LOGIN/%s/g" /root/modele.suphp > /etc/apache2/custom/%s.suphp' % (login_asso,login_asso))
+  sudo('echo %s >> /root/assos.list' % (login_asso))
   sudo('/root/generate_vhost_web.sh')
   #generate_vhost_web()
 

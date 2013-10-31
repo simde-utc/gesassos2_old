@@ -5,9 +5,9 @@ from fabric.api import *
 def main():
   print("portail.main")
   
-def add_portail(login):
+def add_portail(login_asso):
   print("Ajout sql dans la base du portail pour la redirection avec le reverse proxy")
-  sudo('echo %s >> /root/assos.list' % (login))
+  sudo('echo %s >> /root/assos.list' % (login_asso))
   sudo('/root/generate_vhost_portail.sh')
   #generate_vhost_portail()
 

@@ -22,40 +22,40 @@ def main():
 
 @task
 @runs_once
-def precreate_asso(login, president):
-  sql.add_to_portal(login)
-  mail.howto_signup(president)
+def precreate_asso(login_asso, login_president):
+  sql.add_to_portal(login_asso)
+  mail.howto_signup(login_president)
 
 @task
 @runs_once
-def create_asso(login, president):
+def create_asso(login_asso, login_president):
   confirm("Did the president signup the charter ?",False)
   confirm("Are you sure the asso does not exist already ?", False)
   mdp1 = gen_mdp(8)
   mdp2 = gen_mdp(8)
-  files.add_user(login, mdp1)
-  mail.add_mail(login)
-  mail.add_assotous(login)
-  web.add_web(login)
-  portail.add_portail(login)
-  sql.add_sql(login, mdp2)
-  mail.send_passwords(login, president, mdp1, mdp2)
+  files.add_user(login_asso, mdp1)
+  mail.add_mail(login_asso)
+  mail.add_assotous(login_asso)
+  web.add_web(login_asso)
+  portail.add_portail(login_asso)
+  sql.add_sql(login_asso, mdp2)
+  mail.send_passwords(login_asso, login_president, mdp1, mdp2)
   
 @task
 @runs_once
-def change_password_asso(login, president):
+def change_password_asso(login_asso, login_president):
   confirm("Did the president signup the charter ?",False)
   mdp = gen_mdp(8)
-  files.change_passwd(login, mdp)
-  mail.send_new_password_asso(login, president, mdp)
+  files.change_passwd(login_asso, mdp)
+  mail.send_new_password_asso(login_asso, login_president, mdp)
 
 @task
 @runs_once
-def change_password_mysql(login, president):
+def change_password_mysql(login_asso, login_president):
   confirm("Did the president signup the charter ?",False)
   mdp = gen_mdp(8)
-  sql.change_passwd(login, mdp)
-  mail.send_new_password_sql(login, president, mdp)
+  sql.change_passwd(login_asso, mdp)
+  mail.send_new_password_sql(login_asso, login_president, mdp)
 
 
 @task
@@ -66,6 +66,6 @@ def install_modif_generate_vhost():
 
 @task
 @runs_once
-def test(login):
-  sql.add_to_portal(login)
+def test(login_asso):
+  sql.add_to_portal(login_asso)
 
