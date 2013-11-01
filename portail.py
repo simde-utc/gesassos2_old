@@ -12,7 +12,18 @@ def add_portail(login_asso):
   #generate_vhost_portail()
 
 def generate_vhost_portail():
-	sudo("while read -r line do cat > /etc/nginx/assos/${line}.conf <<EOF location /${line}/ {  #more_set_input_headers 'Host: ${line}.\$http_host';  #rewrite      ^/${line}/(.*)$  /\$1  break;  proxy_pass      http://web.mde.utc; } EOF done < '/root/assos.list'")
+	sudo("""while read -r line
+			do
+			cat > /etc/nginx/assos/${line}.conf <<EOF
+			location /${line}/ {
+			  #more_set_input_headers 'Host: ${line}.\$http_host';
+			  #rewrite      ^/${line}/(.*)$  /\$1  break;
+			  proxy_pass      http://web.mde.utc;
+			}
+			EOF
+			done < "/root/assos.list""")
+
+	#sudo("while read -r line do cat > /etc/nginx/assos/${line}.conf <<EOF location /${line}/ {  #more_set_input_headers 'Host: ${line}.\$http_host';  #rewrite      ^/${line}/(.*)$  /\$1  break;  proxy_pass      http://web.mde.utc; } EOF done < '/root/assos.list'")
 	sudo('service nginx reload')
 
 
