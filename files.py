@@ -7,13 +7,15 @@ import gen_mdp
 @roles('files')
 def main():
   print("files.main")
-  
+
+@task  
+@roles('files')
 def add_user(login_asso, mdp):
   env.host_string = 'files.mde.utc'
   sudo('smbldap-useradd -a -d /assos/%s -A1 %s' % (login_asso, login_asso))  
   #print("Suggested password: %s" % mdp)
   #sudo('smbpasswd %s' % login_asso)
-  sudo('echo -ne "%s\n%s\n" | smbpasswd -s %S' % (mdp, mdp, login_asso))
+  sudo('echo -ne "%s\n%s\n" | smbpasswd -s %s' % (mdp, mdp, login_asso))
   sudo('mkdir -p /assos/%s' % login_asso)
   sudo('mkdir -p /sites/%s' % login_asso)
   sudo('mkdir -p /sites/sessions/%s' % login_asso)
@@ -28,6 +30,8 @@ def add_user(login_asso, mdp):
   sudo('chmod 0640 /sites/%s/index.php' % login_asso)
   sudo('ln -s /sites/%s /assos/%s/public_html' % (login_asso, login_asso))
 
+@task  
+@roles('files')
 def change_passwd(login_asso, mdp):
   #print("Suggested password: %s" % mdp)
   #sudo('smbpasswd %s' % login_asso)

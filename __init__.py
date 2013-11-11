@@ -4,9 +4,9 @@ from fabric.api import *
 from fabric.state import env
 
 import files, web, portail, mail, sql
-import config
+import config, gen_mdp
 
-env.use_ssh_config = True
+#env.use_ssh_config = True
 env.roledefs = {
   'portail': ['portail.mde.utc'],
   'web': ['web.mde.utc'],
@@ -31,31 +31,31 @@ def precreate_asso(login_asso, login_president):
 def create_asso(login_asso, login_president):
   confirm("Did the president signup the charter ?",False)
   confirm("Are you sure the asso does not exist already ?", False)
-  mdp1 = gen_mdp(8)
-  mdp2 = gen_mdp(8)
-  files.add_user(login_asso, mdp1)
-  mail.add_mail(login_asso)
-  mail.add_assotous(login_asso)
-  web.add_web(login_asso)
-  portail.add_portail(login_asso)
-  sql.add_sql(login_asso, mdp2)
-  mail.send_passwords(login_asso, login_president, mdp1, mdp2)
+  mdp1 = gen_mdp.gen_mdp(8)
+  mdp2 = gen_mdp.gen_mdp(8)
+  execute(files.add_user,login_asso, mdp1)
+  execute(mail.add_mail,login_asso)
+  execute(mail.add_assotous,login_asso)
+  execute(web.add_web,login_asso)
+  execute(portail.add_portail,login_asso)
+  execute(sql.add_sql,login_asso, mdp2)
+  execute(mail.send_passwords,login_asso, login_president, mdp1, mdp2)
   
 @task
 @runs_once
 def change_password_asso(login_asso, login_president):
   confirm("Did the president signup the charter ?",False)
-  mdp = gen_mdp(8)
-  files.change_passwd(login_asso, mdp)
-  mail.send_new_password_asso(login_asso, login_president, mdp)
+  mdp = gen_mdp.gen_mdp(8)
+  execute(files.change_passwd,login_asso, mdp)
+  execute(mail.send_new_password_asso,login_asso, login_president, mdp)
 
 @task
 @runs_once
 def change_password_mysql(login_asso, login_president):
   confirm("Did the president signup the charter ?",False)
-  mdp = gen_mdp(8)
-  sql.change_passwd(login_asso, mdp)
-  mail.send_new_password_sql(login_asso, login_president, mdp)
+  mdp = gen_mdp.gen_mdp(8)
+  execute(sql.change_passwd,login_asso, mdp)
+  execute(mail.send_new_password_sql,login_asso, login_president, mdp)
 
 
 @task
@@ -67,5 +67,5 @@ def install_modif_generate_vhost():
 @task
 @runs_once
 def test(login_asso):
-  sql.add_to_portal(login_asso)
+  execute(sql.add_to_portal,login_asso)
 
