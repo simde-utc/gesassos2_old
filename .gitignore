@@ -36,3 +36,6 @@ nosetests.xml
 
 # Fichier config
 config.py
+
+#TO DO
+TO_DO.txt
