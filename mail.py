@@ -34,7 +34,7 @@ def add_assotous(login_asso):
 def howto_signup(login_president):
   print("envoi du mail au president pour lui dire d'aller signer la charte")
   to = login_president + "@etu.utc.fr"
-  msg = """From: Simde <simde@assos.utc.fr>
+  msg = """From: SiMDE <simde@assos.utc.fr>
 To: <""" + to + """>
 Subject: Signature de la charte
 
@@ -55,7 +55,7 @@ L'equipe du SiMDE
 def send_passwords(login_asso, login_president, mdp1, mdp2):
   print('Envoi des passwords au president de l\'asso')
   to = login_president + "@etu.utc.fr"
-  msg = """From: Simde <simde@assos.utc.fr>
+  msg = """From: SiMDE <simde@assos.utc.fr>
 To: <""" + to + """>
 Subject: Creation du compte asso
 
@@ -80,7 +80,7 @@ L'equipe du SiMDE
 def send_new_password_asso(login_asso, login_president, mdp):
   print('Envoi du nouveau password asso au president de l\'asso')
   to = login_president + "@etu.utc.fr"
-  msg = """From: Simde <simde@assos.utc.fr>
+  msg = """From: SiMDE <simde@assos.utc.fr>
 To: <""" + to + """>
 Subject: Changement de mot de passe
 
@@ -103,7 +103,7 @@ L'equipe du SiMDE
 def send_new_password_sql(login_asso, login_president, mdp):
   print('Envoi du nouveau password sql au president de l\'asso')
   to = login_president + "@etu.utc.fr"
-  msg = """From: Simde <simde@assos.utc.fr>
+  msg = """From: SiMDE <simde@assos.utc.fr>
 To: <""" + to + """>
 Subject: Changement de mot de passe MySQL
 
