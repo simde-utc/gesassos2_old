@@ -23,15 +23,15 @@ def main():
 @task
 @runs_once
 def precreate_asso(login_asso, login_president):
-  execute(sql.add_to_portal(login_asso))
-  execute(mail.howto_signup(login_president))
+  execute(sql.add_to_portal,login_asso)
+  execute(mail.howto_signup,login_president)
 
 @task
 @runs_once
 def create_asso(login_asso, login_president):
   confirm("Did the president signup the charter ?",False)
   confirm("Are you sure the asso does not exist already ?", False)
-  mdp1 = gen_mdp.gen_mdp(8)
+  mdp0 = gen_mdp.gen_mdp(8)
   mdp2 = gen_mdp.gen_mdp(8)
   execute(files.add_user,login_asso, mdp1)
   execute(mail.add_mail,login_asso)
