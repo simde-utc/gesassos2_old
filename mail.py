@@ -59,6 +59,8 @@ def send_passwords(login_asso, login_president, mdp1, mdp2):
 To: <""" + to + """>
 Subject: Creation du compte asso
 
+Bonjour,
+
 Le compte de ton asso a ete cree avec le login """ + login_asso + """
 
 Voici les mots de passe associes :
@@ -82,6 +84,8 @@ def send_new_password_asso(login_asso, login_president, mdp):
 To: <""" + to + """>
 Subject: Changement de mot de passe
 
+Bonjour,
+
 Le mot de passe du compte asso """ + login_asso + """ vient d'etre change.
 
 Voici le nouveau mot de passe : """ + mdp + """
@@ -102,6 +106,8 @@ def send_new_password_sql(login_asso, login_president, mdp):
   msg = """From: Simde <simde@assos.utc.fr>
 To: <""" + to + """>
 Subject: Changement de mot de passe MySQL
+
+Bonjour,
 
 Le mot de passe de la base de donnee de l'asso """ + login_asso + """ a ete change.
 
