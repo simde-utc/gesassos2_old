@@ -16,7 +16,7 @@ def add_sql(login_asso, mdp):
   db=MySQLdb.connect(host=env.config['mysql']['host'], user=env.config['mysql']['username'], passwd=env.config['mysql']['password'], db='gesassos')
   c=db.cursor()
   c.execute("CALL createUser('%s','%s')" % (login_asso, mdp))
-  db.commit()
+  #db.commit()
   c.close()
   db.close()
   db=MySQLdb.connect(host=env.config['mysql']['host'], user=login_asso, passwd=mdp, db=login_asso)

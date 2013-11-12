@@ -2,7 +2,7 @@ import random
 import string
 
 def gen_mdp(length):
-	print("Le mot de passe a bien été généré")
+	print("Le mot de passe a bien ete genere")
 	# 26 lettres majuscules + 26 lettres minuscules + 10 chiffres [0..9] = 62
 	letters = string.printable[:62]
 	password = ''

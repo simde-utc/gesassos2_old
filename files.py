@@ -32,4 +32,4 @@ def add_user(login_asso, mdp):
 @roles('files')
 def change_passwd(login_asso, mdp):
   print("Le mdp va être changé")
-  sudo('echo -ne "%s\n%s\n" | smbpasswd -s %S' % (mdp, mdp, login_asso))
+  sudo('echo -ne "%s\n%s\n" | smbpasswd -s %s' % (mdp, mdp, login_asso))
