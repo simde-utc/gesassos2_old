@@ -23,8 +23,8 @@ def main():
 @task
 @runs_once
 def precreate_asso(login_asso, login_president):
-  sql.add_to_portal(login_asso)
-  mail.howto_signup(login_president)
+  execute(sql.add_to_portal(login_asso))
+  execute(mail.howto_signup(login_president))
 
 @task
 @runs_once
@@ -56,16 +56,3 @@ def change_password_mysql(login_asso, login_president):
   mdp = gen_mdp.gen_mdp(8)
   execute(sql.change_passwd,login_asso, mdp)
   execute(mail.send_new_password_sql,login_asso, login_president, mdp)
-
-
-@task
-@runs_once
-def install_modif_generate_vhost():
-  put('generate_vhost_web.sh', '/root/generate_vhost_web.sh', True)
-  put('generate_vhost_portail.sh', '/root/generate_vhost_portail.sh', True)
-
-@task
-@runs_once
-def test(login_asso):
-  execute(sql.add_to_portal,login_asso)
-

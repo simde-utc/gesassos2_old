@@ -52,14 +52,14 @@ L'equipe du SiMDE
 
 @task
 @roles('mail')
-def send_passwords(login_president, mdp1, mdp2):
+def send_passwords(login_asso, login_president, mdp1, mdp2):
   print('Envoi des passwords au president de l\'asso')
   to = login_president + "@etu.utc.fr"
   msg = """From: Simde <simde@assos.utc.fr>
 To: <""" + to + """>
 Subject: Creation du compte asso
 
-Le compte de ton asso a ete cree avec le login LOGIN
+Le compte de ton asso a ete cree avec le login """ + login_asso + """
 
 Voici les mots de passe associes :
  - compte asso : """ + mdp1 + """
@@ -75,14 +75,14 @@ L'equipe du SiMDE
 
 @task
 @roles('mail')
-def send_new_password_asso(login_president, mdp):
+def send_new_password_asso(login_asso, login_president, mdp):
   print('Envoi du nouveau password asso au president de l\'asso')
   to = login_president + "@etu.utc.fr"
   msg = """From: Simde <simde@assos.utc.fr>
 To: <""" + to + """>
 Subject: Changement de mot de passe
 
-Le mot de passe du compte asso LOGIN vient d'etre change.
+Le mot de passe du compte asso """ + login_asso + """ vient d'etre change.
 
 Voici le nouveau mot de passe : """ + mdp + """
 
@@ -96,14 +96,14 @@ L'equipe du SiMDE
 
 @task
 @roles('mail')
-def send_new_password_sql(login_president, mdp):
+def send_new_password_sql(login_asso, login_president, mdp):
   print('Envoi du nouveau password sql au president de l\'asso')
   to = login_president + "@etu.utc.fr"
   msg = """From: Simde <simde@assos.utc.fr>
 To: <""" + to + """>
 Subject: Changement de mot de passe MySQL
 
-Le mot de passe de la base de donnee de l'asso LOGIN a ete change.
+Le mot de passe de la base de donnee de l'asso """ + login_asso + """ a ete change.
 
 Voici le nouveau mot de passe : """ + mdp + """
 
