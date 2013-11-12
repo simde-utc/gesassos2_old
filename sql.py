@@ -16,13 +16,11 @@ def add_sql(login_asso, mdp):
   db=MySQLdb.connect(host=env.config['mysql']['host'], user=env.config['mysql']['username'], passwd=env.config['mysql']['password'], db='gesassos')
   c=db.cursor()
   c.execute("CALL createUser('%s','%s')" % (login_asso, mdp))
-  #db.commit()
   c.close()
   db.close()
-  db=MySQLdb.connect(host=env.config['mysql']['host'], user=login_asso, passwd=mdp, db=login_asso)
+  db=MySQLdb.connect(host=env.config['mysql']['host'], user=login_asso, passwd=mdp)
   c=db.cursor()
   c.execute("CREATE DATABASE %s " % login_asso)
-  db.commit()
   c.close()
   db.close()
 
@@ -50,7 +48,6 @@ def change_passwd(login_asso, mdp):
   c=db.cursor()
   print("changement du password sql de l'asso")
   c.execute("CALL changePassword(%s, %s)" % (login_asso, mdp))
-  db.commit()
   c.close()
   db.close()
 
