@@ -43,11 +43,10 @@ def add_to_portal(login_asso):
 @task
 @roles('sql')
 def change_passwd(login_asso, mdp):
-  print("Changement du mot de passe de la bdd de l'asso")
+  print("changement du password sql de l'asso")
   db=MySQLdb.connect(host=env.config['mysql']['host'], user=env.config['mysql']['username'], passwd=env.config['mysql']['password'], db='gesassos')
   c=db.cursor()
-  print("changement du password sql de l'asso")
-  c.execute("CALL changePassword(%s, %s)" % (login_asso, mdp))
+  c.execute("CALL changePassword('%s', '%s')" % (login_asso, mdp))
   c.close()
   db.close()
 
