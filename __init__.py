@@ -31,7 +31,7 @@ def precreate_asso(login_asso, login_president):
 def create_asso(login_asso, login_president):
   confirm("Did the president signup the charter ?",False)
   confirm("Are you sure the asso does not exist already ?", False)
-  mdp0 = gen_mdp.gen_mdp(8)
+  mdp1 = gen_mdp.gen_mdp(8)
   mdp2 = gen_mdp.gen_mdp(8)
   execute(files.add_user,login_asso, mdp1)
   execute(mail.add_mail,login_asso)
@@ -56,3 +56,9 @@ def change_password_mysql(login_asso, login_president):
   mdp = gen_mdp.gen_mdp(8)
   execute(sql.change_passwd,login_asso, mdp)
   execute(mail.send_new_password_sql,login_asso, login_president, mdp)
+
+@task
+@runs_once
+def reload_generate_vhost():
+  execute(portail.generate_vhost_portail())
+  execute(web.generate_vhost_web())
