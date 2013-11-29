@@ -22,6 +22,12 @@ location /${line}/ {
   proxy_pass      http://web.mde.utc;
 }
 EOF
+
+cat > /etc/nginx/assos/${line}.conf-ssl <<EOF
+location /${line}/ {
+  proxy_pass      https://web.mde.utc;
+}
+EOF
 done < '/root/assos.list'""")
 	
 	sudo('service nginx reload')
