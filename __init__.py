@@ -62,3 +62,8 @@ def change_password_mysql(login_asso, login_president):
 def reload_generate_vhost():
   execute(portail.generate_vhost_portail())
   execute(web.generate_vhost_web())
+
+@task
+@runs_once
+def test(login_asso):
+  execute(sql.get_asso_president(login_asso))
