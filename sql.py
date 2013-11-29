@@ -56,7 +56,7 @@ def get_asso_president(login_asso):
   print("Affichage du président de l'asso")
   db=MySQLdb.connect(host=env.config['mysql']['host'], user=env.config['mysql']['username'], passwd=env.config['mysql']['password'], db="portail")
   c=db.cursor()
-  c.execute("SELECT date, confirmation, login, asso_name FROM charte_info WHERE asso_name = login_asso")
+  c.execute("SELECT date, confirmation, login, asso_name FROM charte_info WHERE asso_name = %s" % (login_asso))
   print(c.fetchall())  
   login_president = raw_input("Entrez le nom du président actuel de l'asso : ")
   c.close()
