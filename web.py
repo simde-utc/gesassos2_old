@@ -22,7 +22,7 @@ do
 cat > /etc/php5/fpm/pool.d/${line}.conf <<EOF
 [${line}]
 user = ${line}
-group = web
+group = nogroup
 listen = /var/run/php-fpm-${line}.sock
 pm = ondemand
 pm.max_children = 5
