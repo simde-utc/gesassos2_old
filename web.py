@@ -19,78 +19,60 @@ def generate_vhost_web():
 	# Pool php-fpm	
 	sudo("""while read -r line
 do
-cat > /etc/php5/fpm/pool.d/${line}.conf <<EOF
-[${line}]
-user = ${line}
+ligne=`echo ${line}|grep -v "python"|awk -F " " '{print $1}'`
+
+cat > /etc/php5/fpm/pool.d/$ligne.conf <<EOF
+[$ligne]
+user = $ligne
 group = nogroup
-listen = /var/run/php-fpm-${line}.sock
+listen = /var/run/php-fpm-$ligne.sock
 pm = ondemand
 pm.max_children = 5
 pm.process_idle_timeout = 10s
 chroot=
 chdir = /
-php_value[session.save_path] = /sites/sessions/${line}
-php_value[session.cookie_path] = /${line}
-include=/etc/php5/fpm/pool.d/custom/${line}.conf
+php_value[session.save_path] = /sites/sessions/$ligne
+php_value[session.cookie_path] = /$ligne
+include=/etc/php5/fpm/pool.d/custom/$ligne.conf
 EOF
-done < '/root/assos.list'""")
 
-	# Config apache	
-	sudo("""while read -r line
-do
-cat > /etc/apache2/sites-available/${line} <<EOF
-Include /etc/apache2/custom/${line}
-Alias /${line} /sites/${line}
-Alias /php5-${line}.fastcgi /var/lib/apache2/fastcgi/php5-${line}.fastcgi
-FastCGIExternalServer /var/lib/apache2/fastcgi/php5-${line}.fastcgi -socket /var/run/php-fpm-${line}.sock -idle-timeout 60
-Action php-script-${line} /php5-${line}.fastcgi
-<Directory /sites/${line}>
-  AddHandler php-script-${line} .php
+
+# Config apache	
+
+cat > /etc/apache2/sites-available/$ligne <<EOF
+Include /etc/apache2/custom/$ligne
+Alias /$ligne /sites/$ligne
+Alias /php5-$ligne.fastcgi /var/lib/apache2/fastcgi/php5-$ligne.fastcgi
+FastCGIExternalServer /var/lib/apache2/fastcgi/php5-$ligne.fastcgi -socket /var/run/php-fpm-$ligne.sock -idle-timeout 60
+Action php-script-$ligne /php5-$ligne.fastcgi
+<Directory /sites/$ligne>
+  AddHandler php-script-$ligne .php
   Options FollowSymLinks
   AllowOverride All
   Order allow,deny
   Allow from all
-  Include /etc/apache2/custom/${line}.directory
+  Include /etc/apache2/custom/$ligne.directory
 </Directory>
 EOF
-done < '/root/assos.list'""")
 
-	# Creation des fichiers de config custom
-	sudo("""while read -r line 
-do 
-touch /etc/apache2/custom/${line}.directory 
-done < '/root/assos.list'""")
 
-	sudo("""while read -r line 
-do 
-touch /etc/apache2/custom/${line} 
-done < '/root/assos.list'""")
+# Creation des fichiers de config custom
 
-	sudo("""while read -r line 
-do 
-touch /etc/php5/fpm/pool.d/custom/${line}.conf 
-done < '/root/assos.list'""")
+touch /etc/apache2/custom/$ligne.directory 
+touch /etc/apache2/custom/$ligne 
+touch /etc/php5/fpm/pool.d/custom/$ligne.conf 
 	
-	# Creation du dossier pour les sessions
-	sudo("""while read -r line 
-do 
-mkdir -p /sites/sessions/${line} 
-done < '/root/assos.list'""")
 
-	sudo("""while read -r line 
-do 
-chown ${line}.web /sites/sessions/${line} 
-done < '/root/assos.list'""")
+# Creation du dossier pour les sessions
 
-	sudo("""while read -r line 
-do 
-chmod 2750 /sites/sessions/${line} 
-done < '/root/assos.list'""")
-	
-	# Activation de l'alias
-	sudo("""while read -r line
-do
-a2ensite ${line}
+mkdir -p /sites/sessions/$ligne 
+chown $ligne.web /sites/sessions/$ligne 
+chmod 2750 /sites/sessions/$ligne 
+
+
+# Activation de l'alias
+
+a2ensite $ligne
 done < '/root/assos.list'""")
 	
 	# reload php-fpm

@@ -17,20 +17,44 @@ def add_portail(login_asso):
 def generate_vhost_portail():
 	sudo("""while read -r line
 do
-cat > /etc/nginx/assos/${line}.conf <<EOF
+ligne=`echo ${line}|grep -v "python"|awk -F " " '{print $1}'`
+
+cat > /etc/nginx/assos/$ligne.conf <<EOF
 location /${line}/ {
   proxy_pass      http://web.mde.utc;
 }
 EOF
 
-cat > /etc/nginx/assos/${line}.conf-ssl <<EOF
+cat > /etc/nginx/assos/$ligne.conf-ssl <<EOF
 location /${line}/ {
   proxy_pass      https://web.mde.utc;
 }
 EOF
+
+
+ligne=`echo ${line}|grep "python"|awk -F " " '{print $1}'`
+
+cat > /etc/nginx/assos/$ligne.conf <<EOF
+location /${line}/ {
+  proxy_pass      http://python.mde.utc;
+}
+EOF
+
 done < '/root/assos.list'""")
 	
 	sudo('service nginx reload')
+
+@task
+@roles('portail')
+def change_python(login_asso):
+  print("Le site sera desormais en python")
+  sudo('sed -i "s/%s/%s python/" /root/assos.list' % (login_asso, login_asso))
+
+@task
+@roles('portail')
+def change_php(login_asso):
+  print("Le site sera desormais en python")
+  sudo('sed "s/%s python/%s/" /root/assos.list' % (login_asso, login_asso))
 
 
 
