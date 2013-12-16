@@ -65,10 +65,18 @@ def reload_generate_vhost():
 
 @task
 @runs_once
-def get_president(login_asso):
-  execute(sql.get_asso_president,login_asso)
+def change_for_python(login_asso):
+  execute(portail.change_for_python,login_asso)
+  execute(web.change_for_python,login_asso)
 
 @task
 @runs_once
-def test(login_asso):
-  execute(portail.change_python,login_asso)
+def change_for_php(login_asso):
+  execute(portail.change_for_php,login_asso)
+  execute(web.change_for_php,login_asso)
+
+@task
+@runs_once
+def get_president(login_asso):
+  execute(sql.get_asso_president,login_asso)
+

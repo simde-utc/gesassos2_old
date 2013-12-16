@@ -46,15 +46,15 @@ done < '/root/assos.list'""")
 
 @task
 @roles('portail')
-def change_python(login_asso):
+def change_for_python(login_asso):
   print("Le site sera desormais en python")
   sudo('sed -i "s/%s/%s python/" /root/assos.list' % (login_asso, login_asso))
 
 @task
 @roles('portail')
-def change_php(login_asso):
-  print("Le site sera desormais en python")
-  sudo('sed "s/%s python/%s/" /root/assos.list' % (login_asso, login_asso))
+def change_for_php(login_asso):
+  print("Le site sera desormais en php")
+  sudo('sed -i "s/%s python/%s/" /root/assos.list' % (login_asso, login_asso))
 
 
 

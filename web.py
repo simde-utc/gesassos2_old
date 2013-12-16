@@ -81,6 +81,16 @@ done < '/root/assos.list'""")
 	# reload apache2
 	sudo("service apache2 reload")
 
+@task
+@roles('web')
+def change_for_python(login_asso):
+  sudo('sed -i "s/%s/%s python/" /root/assos.list' % (login_asso, login_asso))
+
+@task
+@roles('web')
+def change_for_php(login_asso):
+  sudo('sed -i "s/%s python/%s/" /root/assos.list' % (login_asso, login_asso))
+
 
 
 
