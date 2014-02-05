@@ -19,7 +19,7 @@ def generate_vhost_web():
 	# Pool php-fpm	
 	sudo("""while read -r line
 do
-ligne=`echo ${line}|grep -v "python"|awk -F " " '{print $1}'`
+ligne=`echo ${line}|awk -F " " '{print $1}'`
 
 cat > /etc/php5/fpm/pool.d/$ligne.conf <<EOF
 [$ligne]

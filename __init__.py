@@ -3,7 +3,7 @@ from fabric.operations import prompt, sudo
 from fabric.api import *
 from fabric.state import env
 
-import files, web, portail, mail, sql
+import files, web, portail, mail, sql, python
 import config, gen_mdp
 
 #env.use_ssh_config = True
@@ -13,6 +13,7 @@ env.roledefs = {
   'files': ['files.mde.utc'],
   'mail': ['mail.mde.utc'],
   'sql': ['sql.mde.utc'],
+  'python': ['python.mde.utc'],
 }
 
 @task(default=True)
@@ -40,6 +41,7 @@ def create_asso(login_asso, login_president):
   execute(portail.add_portail,login_asso)
   execute(sql.add_sql,login_asso, mdp2)
   execute(mail.send_passwords,login_asso, login_president, mdp1, mdp2)
+  execute(python.add_user,login_asso)
   
 @task
 @runs_once
