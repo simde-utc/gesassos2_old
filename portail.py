@@ -20,13 +20,13 @@ do
 ligne=`echo ${line}|grep -v "python"|awk -F " " '{print $1}'`
 
 cat > /etc/nginx/assos/$ligne.conf <<EOF
-location /${line}/ {
+location /$ligne/ {
   proxy_pass      http://web.mde.utc;
 }
 EOF
 
 cat > /etc/nginx/assos/$ligne.conf-ssl <<EOF
-location /${line}/ {
+location /$ligne/ {
   proxy_pass      https://web.mde.utc;
 }
 EOF
@@ -35,7 +35,13 @@ EOF
 ligne=`echo ${line}|grep "python"|awk -F " " '{print $1}'`
 
 cat > /etc/nginx/assos/$ligne.conf <<EOF
-location /${line}/ {
+location /$ligne/ {
+  proxy_pass      http://python.mde.utc;
+}
+EOF
+
+cat > /etc/nginx/assos/$ligne.conf-ssl <<EOF
+location /$ligne/ {
   proxy_pass      http://python.mde.utc;
 }
 EOF
@@ -49,14 +55,14 @@ done < '/root/assos.list'""")
 def change_for_python(login_asso):
   print("Le site sera desormais en python")
   sudo('sed -i "s/%s/%s python/" /root/assos.list' % (login_asso, login_asso))
-  #generate_vhost_portail()
+  generate_vhost_portail()
 
 @task
 @roles('portail')
 def change_for_php(login_asso):
   print("Le site sera desormais en php")
   sudo('sed -i "s/%s python/%s/" /root/assos.list' % (login_asso, login_asso))
-  #generate_vhost_portail()
+  generate_vhost_portail()
 
 
 
