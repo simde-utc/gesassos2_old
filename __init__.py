@@ -42,6 +42,19 @@ def create_asso(login_asso, login_president):
   execute(sql.add_sql,login_asso, mdp2)
   execute(mail.send_passwords,login_asso, login_president, mdp1, mdp2)
   execute(python.add_user,login_asso)
+
+@task
+@runs_once
+def create_service(login_asso, login_president):
+  confirm("Are you sure the service or asso does not exist already ?", False)
+  mdp1 = gen_mdp.gen_mdp(8)
+  mdp2 = gen_mdp.gen_mdp(8)
+  execute(files.add_user,login_asso, mdp1)
+  execute(web.add_web,login_asso)
+  execute(portail.add_portail,login_asso)
+  execute(sql.add_sql,login_asso, mdp2)
+  execute(python.add_user,login_asso)
+  execute(mail.send_passwords,login_asso, login_president, mdp1, mdp2)
   
 @task
 @runs_once
