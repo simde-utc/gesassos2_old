@@ -46,7 +46,7 @@ Alias /php5-$ligne.fastcgi /var/lib/apache2/fastcgi/php5-$ligne.fastcgi
 FastCGIExternalServer /var/lib/apache2/fastcgi/php5-$ligne.fastcgi -socket /var/run/php-fpm-$ligne.sock -idle-timeout 60
 Action php-script-$ligne /php5-$ligne.fastcgi
 <Directory /sites/$ligne>
-  AddHandler php-script-$ligne.php
+  AddHandler php-script-$ligne .php
   Options FollowSymLinks
   AllowOverride All
   Order allow,deny
