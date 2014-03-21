@@ -43,7 +43,8 @@ Bonjour,
 Pour poursuivre la creation de ton compte asso, merci de signer la charte informatique en suivant la procedure suivante :
 http://assos.utc.fr/simde/wiki/signaturecharte
 
-Une fois cela fait, elle doit etre validee par le BDE.
+Une fois cela fait, elle doit etre validee par le BDE, il faut donc le contacter à cette adresse pour faire la demande :
+bde@assos.utc.fr
 
 Cordialement,
 L'equipe du SiMDE
