@@ -26,6 +26,8 @@ cat > /etc/php5/fpm/pool.d/$ligne.conf <<EOF
 user = $ligne
 group = nogroup
 listen = /var/run/php-fpm-$ligne.sock
+listen.owner = www-data
+listen.group = www-data
 pm = ondemand
 pm.max_children = 5
 pm.process_idle_timeout = 10s

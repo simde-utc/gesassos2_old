@@ -94,4 +94,3 @@ def change_for_php(login_asso):
 @runs_once
 def get_president(login_asso):
   execute(sql.get_asso_president,login_asso)
-
