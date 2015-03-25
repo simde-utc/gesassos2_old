@@ -14,6 +14,13 @@ def add_portail(login_asso):
 
 @task
 @roles('portail')
+def del_portail(login_asso):
+  print("Suppression sql dans la base du portail pour la redirection avec le reverse proxy")
+  sudo("sed '/%s/d' /root/assos.list" % login_asso)
+  generate_vhost_portail()
+
+@task
+@roles('portail')
 def generate_vhost_portail():
 	sudo("""while read -r line
 do

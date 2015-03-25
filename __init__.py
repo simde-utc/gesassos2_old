@@ -30,8 +30,10 @@ def precreate_asso(login_asso, login_president):
 @task
 @runs_once
 def create_asso(login_asso, login_president):
-  confirm("Did the president signup the charter ?",False)
-  confirm("Are you sure the asso does not exist already ?", False)
+  if !confirm("Did the president signup the charter ?",False):
+    return
+  if !confirm("Are you sure the asso does not exist already ?", False):
+    return
   mdp1 = gen_mdp.gen_mdp(8)
   mdp2 = gen_mdp.gen_mdp(8)
   execute(files.add_user,login_asso, mdp1)
@@ -46,7 +48,8 @@ def create_asso(login_asso, login_president):
 @task
 @runs_once
 def create_service(login_asso, login_president):
-  confirm("Are you sure the service or asso does not exist already ?", False)
+  if !confirm("Are you sure the service or asso does not exist already ?", False):
+    return
   mdp1 = gen_mdp.gen_mdp(8)
   mdp2 = gen_mdp.gen_mdp(8)
   execute(files.add_user,login_asso, mdp1)
@@ -59,7 +62,8 @@ def create_service(login_asso, login_president):
 @task
 @runs_once
 def change_password_asso(login_asso, login_president):
-  confirm("Did the president signup the charter ?",False)
+  if !confirm("Did the president signup the charter ?",False):
+    return
   mdp = gen_mdp.gen_mdp(8)
   execute(files.change_passwd,login_asso, mdp)
   execute(mail.send_new_password_asso,login_asso, login_president, mdp)
@@ -67,7 +71,8 @@ def change_password_asso(login_asso, login_president):
 @task
 @runs_once
 def change_password_mysql(login_asso, login_president):
-  confirm("Did the president signup the charter ?",False)
+  if !confirm("Did the president signup the charter ?",False):
+    return
   mdp = gen_mdp.gen_mdp(8)
   execute(sql.change_passwd,login_asso, mdp)
   execute(mail.send_new_password_sql,login_asso, login_president, mdp)
@@ -94,4 +99,16 @@ def change_for_php(login_asso):
 @runs_once
 def get_president(login_asso):
   execute(sql.get_asso_president,login_asso)
+
+@task
+@runs_once
+def delete_asso(login_asso):
+  execute(files.del_user,login_asso)
+  execute(mail.del_mail,login_asso)
+  execute(mail.del_mailings,login_asso)
+  execute(web.del_web,login_asso)
+  execute(portail.del_portail,login_asso)
+  execute(sql.del_sql,login_asso)
+  execute(python.add_user,login_asso)
+  execute(sql.del_from_portal,login_asso)
 
