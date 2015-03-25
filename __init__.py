@@ -31,9 +31,9 @@ def precreate_asso(login_asso, login_president):
 @runs_once
 def create_asso(login_asso, login_president):
   if !confirm("Did the president signup the charter ?",False):
-    return
+    abort("")
   if !confirm("Are you sure the asso does not exist already ?", False):
-    return
+    abort("")
   mdp1 = gen_mdp.gen_mdp(8)
   mdp2 = gen_mdp.gen_mdp(8)
   execute(files.add_user,login_asso, mdp1)
@@ -49,7 +49,7 @@ def create_asso(login_asso, login_president):
 @runs_once
 def create_service(login_asso, login_president):
   if !confirm("Are you sure the service or asso does not exist already ?", False):
-    return
+    abort("")
   mdp1 = gen_mdp.gen_mdp(8)
   mdp2 = gen_mdp.gen_mdp(8)
   execute(files.add_user,login_asso, mdp1)
@@ -63,7 +63,7 @@ def create_service(login_asso, login_president):
 @runs_once
 def change_password_asso(login_asso, login_president):
   if !confirm("Did the president signup the charter ?",False):
-    return
+    abort("")
   mdp = gen_mdp.gen_mdp(8)
   execute(files.change_passwd,login_asso, mdp)
   execute(mail.send_new_password_asso,login_asso, login_president, mdp)
