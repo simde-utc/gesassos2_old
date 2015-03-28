@@ -30,9 +30,9 @@ def precreate_asso(login_asso, login_president):
 @task
 @runs_once
 def create_asso(login_asso, login_president):
-  if !confirm("Did the president signup the charter ?",False):
+  if not confirm("Did the president signup the charter ?",False):
     abort("")
-  if !confirm("Are you sure the asso does not exist already ?", False):
+  if not confirm("Are you sure the asso does not exist already ?", False):
     abort("")
   mdp1 = gen_mdp.gen_mdp(8)
   mdp2 = gen_mdp.gen_mdp(8)
@@ -48,7 +48,7 @@ def create_asso(login_asso, login_president):
 @task
 @runs_once
 def create_service(login_asso, login_president):
-  if !confirm("Are you sure the service or asso does not exist already ?", False):
+  if not confirm("Are you sure the service or asso does not exist already ?", False):
     abort("")
   mdp1 = gen_mdp.gen_mdp(8)
   mdp2 = gen_mdp.gen_mdp(8)
@@ -62,7 +62,7 @@ def create_service(login_asso, login_president):
 @task
 @runs_once
 def change_password_asso(login_asso, login_president):
-  if !confirm("Did the president signup the charter ?",False):
+  if not confirm("Did the president signup the charter ?",False):
     abort("")
   mdp = gen_mdp.gen_mdp(8)
   execute(files.change_passwd,login_asso, mdp)
@@ -71,7 +71,7 @@ def change_password_asso(login_asso, login_president):
 @task
 @runs_once
 def change_password_mysql(login_asso, login_president):
-  if !confirm("Did the president signup the charter ?",False):
+  if not confirm("Did the president signup the charter ?",False):
     return
   mdp = gen_mdp.gen_mdp(8)
   execute(sql.change_passwd,login_asso, mdp)
