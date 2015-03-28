@@ -42,6 +42,27 @@ def add_to_portal(login_asso):
 
 @task
 @roles('sql')
+def del_sql(login_asso):
+  print("Pensez à supprimer à la main le user mysql")
+  db=MySQLdb.connect(host=env.config['mysql']['host'], user=login_asso, passwd=mdp)
+  c=db.cursor()
+  c.execute("DROP DATABASE %s " % login_asso)
+  c.close()
+  db.close()
+
+@task
+@roles('sql')
+def del_from_portal(login_asso):
+  print("Désactivation de l'asso en mettant son pole a vide")
+  db=MySQLdb.connect(host=env.config['mysql']['host'], user=env.config['mysql']['username'], passwd=env.config['mysql']['password'], db="portail")
+  c=db.cursor()
+  c.execute("UPDATE asso SET pole_id='' WHERE login='%s'" % login_asso)
+  db.commit()
+  c.close()
+  db.close()
+
+@task
+@roles('sql')
 def change_passwd(login_asso, mdp):
   print("changement du password sql de l'asso")
   db=MySQLdb.connect(host=env.config['mysql']['host'], user=env.config['mysql']['username'], passwd=env.config['mysql']['password'], db='gesassos')

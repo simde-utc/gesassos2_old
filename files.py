@@ -30,6 +30,15 @@ def add_user(login_asso, mdp):
 
 @task  
 @roles('files')
+def del_user(login_asso):
+  env.host_string = 'files.mde.utc'
+  sudo('smbldap-userdel %s' % login_asso)
+  sudo('rm -R /assos/%s' % login_asso)
+  sudo('rm -R /sites/%s' % login_asso)
+  sudo('rm -R /sites/sessions/%s' % login_asso)
+
+@task  
+@roles('files')
 def change_passwd(login_asso, mdp):
   print("Le mdp va être changé")
   sudo('echo -ne "%s\n%s\n" | smbpasswd -s %s' % (mdp, mdp, login_asso))
