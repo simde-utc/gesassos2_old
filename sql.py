@@ -47,7 +47,7 @@ def get_poles():
   c=db.cursor()
   c.execute("SELECT pole.id, asso.name FROM pole INNER JOIN asso ON asso.id = pole.asso_id")
   for pole in c:
-    print('{0} correspond au pole {1}\n'.format(pole[0], pole[1]))
+    print('{0} correspond au pole {1}'.format(pole[0], pole[1]))
   c.close()
   db.close()
 
