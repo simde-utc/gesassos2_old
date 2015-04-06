@@ -82,8 +82,7 @@ def get_asso_president(login_asso):
   # print(c.fetchall()) 
   lastPresident = c.fetchone()
   if not lastPresident:
-    print("Cette asso n'existe pas...")
-    abort("")
+    abort("Cette asso n'existe pas...")
 
   lP_date = lastPresident[0]
   lP_confirmation = lastPresident[1]
