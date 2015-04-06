@@ -3,6 +3,7 @@
 from fabric.api import *
 import MySQLdb
 import gen_mdp
+from datetime import datetime
 
 @task(default=True)
 @roles('sql')
@@ -78,8 +79,33 @@ def get_asso_president(login_asso):
   db=MySQLdb.connect(host=env.config['mysql']['host'], user=env.config['mysql']['username'], passwd=env.config['mysql']['password'], db="portail")
   c=db.cursor()
   c.execute("SELECT date, confirmation, login FROM charte_info WHERE asso_name = '%s' ORDER BY id DESC" % (login_asso))
-  print(c.fetchall())  
-  login_president = raw_input("Entrez le nom du président actuel de l'asso : ")
+  # print(c.fetchall()) 
+  lastPresident = c.fetchone()
+  if not lastPresident:
+    abort("Cette asso n'existe pas...")
+
+  lP_date = lastPresident[0]
+  lP_confirmation = lastPresident[1]
+  lP_login = lastPresident[2]
+
+  now = datetime.now()
+  login_president = ""
+  if (lP_confirmation == 1): # si confirmé
+    if (2 <= now.month <= 9) and (2 <= lP_date.month <= 9) and (lP_date.year == now.year): # si on est au printemp et la déclaration du prez aussi
+      login_president = lP_login
+    else: # si on est à l'automne dans la même année (on vérifie)
+      if  ((9 <= now.month <= 12) and (9 <= lP_date.month <= 12) and (lP_date.year == now.year-1)) or\
+        ((1 <= now.month <= 2) and (1 <= lP_date.month <= 2) and (lP_date.year == now.year)):
+        login_president = lP_login
+
+  if login_president:
+    print('{0} est président(e) depuis le {1}/{2}/{3}'.format( login_president, lP_date.day, lP_date.month, lP_date.year))
+  else:
+    print('Pas de président confirmé ce semestre, on annule tout...')
+    print(lastPresident)
+    print(c.fetchall())
+    abort("")
+
   c.close()
   db.close()
   return login_president
