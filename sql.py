@@ -96,13 +96,13 @@ def get_asso_president(login_asso):
         login_president = lP_login
 
   if login_president:
-    print('{} est président(e) depuis le {}/{}/{}'.format( login_president, lP_date.day, lP_date.month, lP_date.year))
+    print('{0} est président(e) depuis le {1}/{2}/{3}'.format( login_president, lP_date.day, lP_date.month, lP_date.year))
   else:
     print('Pas de président confirmé ce semestre, on annule tout...')
     print(lastPresident)
     print(c.fetchall())
     abort("")
-  
+
   c.close()
   db.close()
   return login_president
