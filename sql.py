@@ -81,6 +81,10 @@ def get_asso_president(login_asso):
   c.execute("SELECT date, confirmation, login FROM charte_info WHERE asso_name = '%s' ORDER BY id DESC" % (login_asso))
   # print(c.fetchall()) 
   lastPresident = c.fetchone()
+  if not lastPresident:
+    print("Cette asso n'existe pas...")
+    abort("")
+
   lP_date = lastPresident[0]
   lP_confirmation = lastPresident[1]
   lP_login = lastPresident[2]
