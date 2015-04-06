@@ -32,12 +32,22 @@ def add_to_portal(login_asso):
   db=MySQLdb.connect(host=env.config['mysql']['host'], user=env.config['mysql']['username'], passwd=env.config['mysql']['password'], db="portail")
   c=db.cursor()
   print("ajout dans la bdd du portail")
-  c.execute("SELECT pole.id, asso.name FROM pole INNER JOIN asso ON asso.id = pole.asso_id")
-  print(c.fetchall())
+  get_poles
   num_pole = input("Entrez le numero du pole de l'asso a creer : ")
   nom_asso = raw_input("Entrez le nom de l'asso pour le portail : ")
   c.execute("INSERT INTO asso (name, login, pole_id, active, created_at, updated_at) values ('%s', '%s', '%d', 1, NOW(), NOW())" % (nom_asso, login_asso, num_pole))
   db.commit()
+  c.close()
+  db.close()
+
+@task
+@roles('sql')
+def get_poles():
+  db=MySQLdb.connect(host=env.config['mysql']['host'], user=env.config['mysql']['username'], passwd=env.config['mysql']['password'], db="portail")
+  c=db.cursor()
+  c.execute("SELECT pole.id, asso.name FROM pole INNER JOIN asso ON asso.id = pole.asso_id")
+  while pole = c.fetchone():
+    print('{0} correspond au pole {1}\n'.format(pole[0], pole[1]))
   c.close()
   db.close()
 
