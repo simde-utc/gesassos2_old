@@ -111,3 +111,8 @@ def delete_asso(login_asso):
   execute(sql.del_sql,login_asso)
   execute(python.add_user,login_asso)
   execute(sql.del_from_portal,login_asso)
+
+@task
+@runs_once
+def get_poles():
+  execute(sql.get_poles)
