@@ -43,7 +43,7 @@ def create_asso(login_asso, login_president):
   execute(portail.add_portail,login_asso)
   execute(sql.add_sql,login_asso, mdp2)
   execute(python.add_user,login_asso)
-  execute(mail.send_passwords,login_asso, login_president, mdp1, mdp2)  
+  execute(mail.send_passwords,login_asso, mdp1, mdp2)  
 
 @task
 @runs_once
@@ -57,25 +57,27 @@ def create_service(login_asso, login_president):
   execute(portail.add_portail,login_asso)
   execute(sql.add_sql,login_asso, mdp2)
   execute(python.add_user,login_asso)
-  execute(mail.send_passwords,login_asso, login_president, mdp1, mdp2)
+  execute(mail.send_passwords,login_asso, mdp1, mdp2)
   
 @task
 @runs_once
-def change_password_asso(login_asso, login_president):
+def change_password_asso(login_asso):
+  login_president = execute(sql.get_asso_president,login_asso)
   if not confirm("Did the president signup the charter ?",False):
     abort("")
   mdp = gen_mdp.gen_mdp(8)
   execute(files.change_passwd,login_asso, mdp)
-  execute(mail.send_new_password_asso,login_asso, login_president, mdp)
+  execute(mail.send_new_password_asso,login_asso, mdp)
 
 @task
 @runs_once
-def change_password_mysql(login_asso, login_president):
+def change_password_mysql(login_asso):
+  login_president = execute(sql.get_asso_president,login_asso)
   if not confirm("Did the president signup the charter ?",False):
     return
   mdp = gen_mdp.gen_mdp(8)
   execute(sql.change_passwd,login_asso, mdp)
-  execute(mail.send_new_password_sql,login_asso, login_president, mdp)
+  execute(mail.send_new_password_sql,login_asso, mdp)
 
 @task
 @runs_once
