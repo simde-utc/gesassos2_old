@@ -72,8 +72,7 @@ L'equipe du SiMDE
 
 @task
 @roles('mail')
-def send_passwords(login_asso, mdp1, mdp2):
-  login_president = execute(sql.get_asso_president,login_asso)
+def send_passwords(login_asso, login_president, mdp1, mdp2):
   print('Envoi des passwords au president de l\'asso')
   to = login_president + "@etu.utc.fr"
   msg = """From: SiMDE <simde@assos.utc.fr>
@@ -98,8 +97,7 @@ L'equipe du SiMDE
 
 @task
 @roles('mail')
-def send_new_password_asso(login_asso, mdp):
-  login_president = execute(sql.get_asso_president,login_asso)
+def send_new_password_asso(login_asso, login_president, mdp):
   print('Envoi du nouveau password asso au president de l\'asso')
   to = login_president + "@etu.utc.fr"
   msg = """From: SiMDE <simde@assos.utc.fr>
@@ -122,8 +120,7 @@ L'equipe du SiMDE
 
 @task
 @roles('mail')
-def send_new_password_sql(login_asso, mdp):
-  login_president = execute(sql.get_asso_president,login_asso)
+def send_new_password_sql(login_asso, login_president, mdp):
   print('Envoi du nouveau password sql au president de l\'asso')
   to = login_president + "@etu.utc.fr"
   msg = """From: SiMDE <simde@assos.utc.fr>
