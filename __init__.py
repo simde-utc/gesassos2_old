@@ -30,7 +30,7 @@ def precreate_asso(login_asso, login_president):
 @task
 @runs_once
 def create_asso(login_asso):
-  login_president = execute(sql.get_asso_president,login_asso)
+  login_president = execute(sql.get_asso_president,login_asso)['sql.mde.utc']
   if not confirm("Are you sure the asso does not exist already ?", False):
     abort("")
   mdp1 = gen_mdp.gen_mdp(8)
@@ -61,7 +61,7 @@ def create_service(login_asso, login_president):
 @task
 @runs_once
 def change_password_asso(login_asso):
-  login_president = execute(sql.get_asso_president,login_asso)
+  login_president = execute(sql.get_asso_president,login_asso)['sql.mde.utc']
   mdp = gen_mdp.gen_mdp(8)
   execute(files.change_passwd,login_asso, mdp)
   execute(mail.send_new_password_asso,login_asso, login_president, mdp)
@@ -69,7 +69,7 @@ def change_password_asso(login_asso):
 @task
 @runs_once
 def change_password_mysql(login_asso):
-  login_president = execute(sql.get_asso_president,login_asso)
+  login_president = execute(sql.get_asso_president,login_asso)['sql.mde.utc']
   mdp = gen_mdp.gen_mdp(8)
   execute(sql.change_passwd,login_asso, mdp)
   execute(mail.send_new_password_sql,login_asso, login_president, mdp)
