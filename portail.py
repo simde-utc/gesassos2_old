@@ -71,6 +71,13 @@ def change_for_php(login_asso):
   sudo('sed -i "s/%s python/%s/" /root/assos.list' % (login_asso, login_asso))
   generate_vhost_portail()
 
+@task
+@roles('portail')
+def change_for_php(login_asso):
+  print("Le site sera desormais en nodejs")
+  sudo('sed -i "s/%s python/%s/" /root/assos.list' % (login_asso, login_asso))
+  generate_vhost_portail()
+
 
 
 

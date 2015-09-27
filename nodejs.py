@@ -1,0 +1,26 @@
+# coding=utf-8
+
+from fabric.api import *
+from contextlib import nested
+
+@task(default=True)
+@roles('nodejs')
+def main():
+  print("nodejs.main")
+
+@task
+@roles('python')
+def add_user(login_asso):
+  print("Création du site nodejs de l'utilisateur")
+  # with nested(cd('/root/python-hosting'), prefix('source env/bin/activate')):
+  #        sudo('./manage.py %s create' % (login_asso))
+  #        sudo('./manage.py %s enable' % (login_asso))
+
+@task
+@roles('python')
+def del_user(login_asso):
+  print("Désactivation du site nodejs de l'utilisateur")
+  # with nested(cd('/root/python-hosting'), prefix('source env/bin/activate')):
+  #        sudo('./manage.py %s disable' % (login_asso))
+
+  print("Penser à supprimer à la main les dossiers de l'asso sur nodejs")

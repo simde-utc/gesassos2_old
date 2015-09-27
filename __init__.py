@@ -3,7 +3,7 @@ from fabric.operations import prompt, sudo
 from fabric.api import *
 from fabric.state import env
 
-import files, web, portail, mail, sql, python
+import files, web, portail, mail, sql, python, nodejs
 import config, gen_mdp
 
 #env.use_ssh_config = True
@@ -107,5 +107,6 @@ def delete_asso(login_asso):
   execute(web.del_web,login_asso)
   execute(portail.del_portail,login_asso)
   execute(sql.del_sql,login_asso)
-  execute(python.add_user,login_asso)
+  execute(python.del_user,login_asso)
+  execute(nodejs.del_user,login_asso)
   execute(sql.del_from_portal,login_asso)
