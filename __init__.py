@@ -14,6 +14,7 @@ env.roledefs = {
   'mail': ['mail.mde.utc'],
   'sql': ['sql.mde.utc'],
   'python': ['python.mde.utc'],
+  'nodejs': ['nodejs.mde.utc']
 }
 
 @task(default=True)
