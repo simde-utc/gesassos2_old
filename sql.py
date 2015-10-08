@@ -104,8 +104,9 @@ def get_asso_president(login_asso):
     if (2 <= now.month <= 9) and (2 <= lP_date.month <= 9) and (lP_date.year == now.year): # si on est au printemp et la déclaration du prez aussi
       login_president = lP_login
     else: # si on est à l'automne dans la même année (on vérifie)
-      if  ((9 <= now.month <= 12) and (9 <= lP_date.month <= 12) and (lP_date.year == now.year-1)) or\
-        ((1 <= now.month <= 2) and (1 <= lP_date.month <= 2) and (lP_date.year == now.year)):
+      if  ((9 <= now.month <= 12) and (9 <= lP_date.month <= 12) and (lP_date.year == now.year)) or\
+        ((1 <= now.month <= 2) and (1 <= lP_date.month <= 2) and (lP_date.year == now.year)) or\
+	((1 <= now.month <= 2) and (9 <= lP_date.month <= 12) and (lP_date.year == now.year-1)):
         login_president = lP_login
 
   if login_president:
