@@ -73,6 +73,20 @@ def change_password_mysql(login_asso):
   mdp = gen_mdp.gen_mdp(8)
   execute(sql.change_passwd,login_asso, mdp)
   execute(mail.send_new_password_sql,login_asso, login_president, mdp)
+  
+@task
+@runs_once
+def change_password_service(login_service,login_president):
+  mdp = gen_mdp.gen_mdp(8)
+  execute(files.change_passwd,login_service, mdp)
+  execute(mail.send_new_password_asso,login_service, login_president, mdp)
+
+@task
+@runs_once
+def change_password_mysql_service(login_service,login_president):
+  mdp = gen_mdp.gen_mdp(8)
+  execute(sql.change_passwd,login_service, mdp)
+  execute(mail.send_new_password_sql,login_service, login_president, mdp)
 
 @task
 @runs_once
