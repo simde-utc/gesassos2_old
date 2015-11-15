@@ -106,5 +106,5 @@ def delete_asso(login_asso):
   execute(web.del_web,login_asso)
   execute(portail.del_portail,login_asso)
   execute(sql.del_sql,login_asso)
-  execute(python.add_user,login_asso)
+  execute(python.del_user,login_asso)
   execute(sql.del_from_portal,login_asso)

@@ -32,7 +32,7 @@ def add_to_portal(login_asso):
   db=MySQLdb.connect(host=env.config['mysql']['host'], user=env.config['mysql']['username'], passwd=env.config['mysql']['password'], db="portail")
   c=db.cursor()
   print("ajout dans la bdd du portail")
-  get_poles
+  get_poles()
   num_pole = input("Entrez le numero du pole de l'asso a creer : ")
   nom_asso = raw_input("Entrez le nom de l'asso pour le portail : ")
   c.execute("INSERT INTO asso (name, login, pole_id, active, created_at, updated_at) values ('%s', '%s', '%d', 1, NOW(), NOW())" % (nom_asso, login_asso, num_pole))
