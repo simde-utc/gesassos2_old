@@ -30,10 +30,29 @@ def del_web(login_asso):
     except:
       pass
     try:
+      sudo('rm /etc/php5/fpm/pool.d/%s.conf' % login_asso)
+    except:
+      pass
+    try:
+      sudo('rm /etc/apache2/sites-available/%s' % login_asso)
+    except:
+      pass  
+    try:
+      sudo('rm /etc/apache2/sites-enabled/%s' % login_asso)
+    except:
+      pass      
+    try:
+      sudo('rm /etc/php5/fpm/pool.d/custom/%s.conf' % login_asso)
+    except:
+      pass
+    try:
       sudo("sed -i '/%s/d' /root/assos.list" % login_asso)
     except:
       pass
+    try:
     generate_vhost_web()
+  except:
+    pass
 
 @task
 @roles('web')
@@ -90,7 +109,7 @@ touch /etc/php5/fpm/pool.d/custom/$ligne.conf
 # Creation du dossier pour les sessions
 
 mkdir -p /sites/sessions/$ligne 
-chown $ligne.web /sites/sessions/$ligne 
+chown $ligne.web /sites/sessions/$ligne
 chmod 2750 /sites/sessions/$ligne 
 
 
