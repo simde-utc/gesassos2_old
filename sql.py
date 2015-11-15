@@ -66,7 +66,7 @@ def del_sql(login_asso):
 @roles('sql')
 def del_from_portal(login_asso):
   try:
-    print("Désactivation de l'asso en mettant son pole a vide")
+    print("Désactivation de l'asso en mettant son pole a vide, si vous avez besoin de vraiment le supprimer, il faut le faire à la main dans le backend")
     db=MySQLdb.connect(host=env.config['mysql']['host'], user=env.config['mysql']['username'], passwd=env.config['mysql']['password'], db="portail")
     c=db.cursor()
     c.execute("UPDATE asso SET pole_id=NULL WHERE login='%s'" % login_asso)
