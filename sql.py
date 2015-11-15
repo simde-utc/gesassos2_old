@@ -61,6 +61,8 @@ def del_sql(login_asso):
     c.execute("DROP DATABASE %s " % login_asso)
     c.close()
     db.close()
+  except:
+    pass
 
 @task
 @roles('sql')
@@ -73,6 +75,8 @@ def del_from_portal(login_asso):
     db.commit()
     c.close()
     db.close()
+  except:
+    pass
 
 @task
 @roles('sql')

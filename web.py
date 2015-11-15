@@ -21,6 +21,8 @@ def del_web(login_asso):
     sudo('rm /etc/apache2/custom/%s.suphp' % login_asso)
     sudo("sed -i '/%s/d' /root/assos.list" % login_asso)
     generate_vhost_web()
+  except:
+    pass
 
 @task
 @roles('web')

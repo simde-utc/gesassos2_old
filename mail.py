@@ -34,6 +34,8 @@ def add_assotous(login_asso):
 def del_mail(login_asso):
   try:
     sudo('rm -R /mails/%s' % login_asso)
+  except:
+    pass
   
 @task
 @roles('mail')
@@ -50,6 +52,8 @@ def del_mailings(login_asso):
     db.commit()
     c.close()
     db.close()
+  except:
+    pass
 
 @task
 @roles('mail')

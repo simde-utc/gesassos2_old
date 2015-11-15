@@ -37,6 +37,8 @@ def del_user(login_asso):
     sudo('rm -R /assos/%s' % login_asso)
     sudo('rm -R /sites/%s' % login_asso)
     sudo('rm -R /sites/sessions/%s' % login_asso)
+    except:
+      pass
 
 @task  
 @roles('files')
