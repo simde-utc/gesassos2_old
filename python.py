@@ -23,6 +23,9 @@ def del_user(login_asso):
     print("Desactivation du site python de l'utilisateur")
     with nested(cd('/root/python-hosting'), prefix('source env/bin/activate')):
       sudo('./manage.py %s disable' % (login_asso))
+  except:
+    pass
+  try:    
     sudo('rm -R /python/sites/%s' % login_asso)
   except:
     pass
