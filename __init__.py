@@ -131,5 +131,5 @@ def delete_service(login_asso):
   execute(portail.del_portail,login_asso)
   execute(sql.del_sql,login_asso)
   execute(python.del_user,login_asso)
-  print("Si le service a été modifié à la main, faire un delete_asso en plus")
-  print("(ça supprimera le service du portail des assos et du serveur de mail)")
+  print("If the servie has been modified run delete_asso")
+  print("(this will delete the service from the assos website and from the mail server)")
