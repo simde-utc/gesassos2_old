@@ -32,21 +32,24 @@ def add_assotous(login_asso):
 @task
 @roles('mail')
 def del_mail(login_asso):
-  sudo('rm -R /mails/%s' % login_asso)
+  try:
+    sudo('rm -R /mails/%s' % login_asso)
   
 @task
 @roles('mail')
 def del_mailings(login_asso):  
-  db=MySQLdb.connect(host=env.config['mysql']['host'], user=env.config['mysql']['username'], passwd=env.config['mysql']['password'], db="mail")
-  c=db.cursor() 
-  print("suppression des mailings et redirections ainsi que de l'asso-tous")
-  c.execute("DELETE FROM mailman_mysql WHERE listname='asso-tous' AND address='%s@assos.utc.fr'" % login_asso)
-  c.execute("DELETE FROM mailman_mysql WHERE listname LIKE '%s%'" % login_asso)
-  c.execute("DELETE FROM gesmail WHERE Asso='%s'" % login_asso)
-  c.execute("DELETE FROM postfix_alias WHERE alias LIKE '%s%'" % login_asso)
-  db.commit()
-  c.close()
-  db.close()
+  try:
+    db=MySQLdb.connect(host=env.config['mysql']['host'], user=env.config['mysql']['username'], passwd=env.config['mysql']['password'], db="mail")
+    c=db.cursor() 
+    print("suppression des mailings et redirections ainsi que de l'asso-tous")
+
+    c.execute("DELETE FROM mailman_mysql WHERE listname='asso-tous' AND address='%s@assos.utc.fr'" % login_asso)
+    c.execute("DELETE FROM mailman_mysql WHERE listname LIKE '%s%'" % login_asso)
+    c.execute("DELETE FROM gesmail WHERE Asso='%s'" % login_asso)
+    c.execute("DELETE FROM postfix_alias WHERE alias LIKE '%s%'" % login_asso)
+    db.commit()
+    c.close()
+    db.close()
 
 @task
 @roles('mail')

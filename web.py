@@ -16,10 +16,11 @@ def add_web(login_asso):
 @task
 @roles('web')
 def del_web(login_asso):
-  print("Suppression des fichiers de conf apache")
-  sudo('rm /etc/apache2/custom/%s.suphp' % login_asso)
-  sudo("sed -i '/%s/d' /root/assos.list" % login_asso)
-  generate_vhost_web()
+  try:  
+    print("Suppression des fichiers de conf apache")
+    sudo('rm /etc/apache2/custom/%s.suphp' % login_asso)
+    sudo("sed -i '/%s/d' /root/assos.list" % login_asso)
+    generate_vhost_web()
 
 @task
 @roles('web')
