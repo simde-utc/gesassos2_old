@@ -43,6 +43,7 @@ def create_asso(login_asso):
   execute(portail.add_portail,login_asso)
   execute(sql.add_sql,login_asso, mdp2)
   execute(python.add_user,login_asso)
+  execute(nodejs.add_user,login_asso)
   execute(mail.send_passwords,login_asso, login_president, mdp1, mdp2)
   
 @task
@@ -57,6 +58,7 @@ def create_service(login_asso, login_president):
   execute(portail.add_portail,login_asso)
   execute(sql.add_sql,login_asso, mdp2)
   execute(python.add_user,login_asso)
+  execute(nodejs.add_user,login_asso)
   execute(mail.send_passwords,login_asso, login_president, mdp1, mdp2)
   
 @task
@@ -86,6 +88,12 @@ def reload_generate_vhost():
 def change_for_python(login_asso):
   execute(portail.change_for_python,login_asso)
   execute(web.change_for_python,login_asso)
+
+@task
+@runs_once
+def change_for_nodejs(login_asso):
+  execute(portail.change_for_nodejs,login_asso)
+  execute(web.change_for_nodejs,login_asso)
 
 @task
 @runs_once
