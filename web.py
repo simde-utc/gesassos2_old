@@ -50,9 +50,9 @@ def del_web(login_asso):
     except:
       pass
     try:
-    generate_vhost_web()
-  except:
-    pass
+      generate_vhost_web()
+    except:
+      pass
 
 @task
 @roles('web')
