@@ -22,6 +22,8 @@ def del_portail(login_asso):
   except:
     pass
 
+# Pour chaque ligne de /root/assos.list
+# generer un fichier de conf nginx php ou python
 @task
 @roles('portail')
 def generate_vhost_portail():

@@ -16,3 +16,12 @@ Outil de gestion des comptes assos du SiMDE
 ### Projet
 
     git clone git://github.com/simde-utc/gesassos2.git ~/fabile
+
+
+## Utilisation
+
+Exécuter dans le dossier du dépôt :
+
+    fab -f . fonction:param1,param2
+
+Avec `fonction` une fonction du fichier `__init__.py`
