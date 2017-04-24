@@ -15,18 +15,20 @@ def add_user(login_asso, mdp):
   sudo('smbldap-useradd -a -d /assos/%s -A1 %s' % (login_asso, login_asso))  
   sudo('echo -ne "%s\n%s\n" | smbpasswd -s %s' % (mdp, mdp, login_asso))
   sudo('mkdir -p /assos/%s' % login_asso)
-  sudo('mkdir -p /sites/%s' % login_asso)
-  sudo('mkdir -p /sites/sessions/%s' % login_asso)
+  sudo('mkdir -p /var/sites/php/%s' % login_asso)
+  sudo('mkdir -p /var/sites/python/%s' % login_asso)
+  sudo('mkdir -p /var/sites/node/%s' % login_asso)
+  sudo('mkdir -p /var/sites/sessions/%s' % login_asso)
   sudo('chown -R %s:"Domain Users" /assos/%s' % (login_asso, login_asso))
-  sudo('chown -R %s:web /sites/%s' % (login_asso, login_asso))
-  sudo('chown -R %s:web /sites/sessions/%s' % (login_asso, login_asso))
+  sudo('chown -R %s:php /var/sites/php/%s' % (login_asso, login_asso))
+  sudo('chown -R %s:php /var/sites/sessions/%s' % (login_asso, login_asso))
   sudo('chmod 0700 -R /assos/%s' % login_asso)
-  sudo('chmod 2750 -R /sites/%s' % login_asso)
-  sudo('chmod 2750 -R /sites/sessions/%s' % login_asso)
-  sudo("echo \"<?php\nheader('Location: http://assos.utc.fr/asso/%s');\n?>\" > /sites/%s/index.php" % (login_asso, login_asso))
-  sudo('chown %s:web /sites/%s/index.php' % (login_asso, login_asso))
-  sudo('chmod 0640 /sites/%s/index.php' % login_asso)
-  sudo('ln -s /sites/%s /assos/%s/public_html' % (login_asso, login_asso))
+  sudo('chmod 2750 -R /var/sites/php/%s' % login_asso)
+  sudo('chmod 2750 -R /var/sites/sessions/%s' % login_asso)
+  sudo("echo \"<?php\nheader('Location: https://assos.utc.fr/asso/%s');\n?>\" > /var/sites/php/%s/index.php" % (login_asso, login_asso))
+  sudo('chown %s:php /var/sites/php/%s/index.php' % (login_asso, login_asso))
+  sudo('chmod 0640 /var/sites/php/%s/index.php' % login_asso)
+  sudo('ln -s /var/sites/php/%s /assos/%s/public_html' % (login_asso, login_asso))
 
 @task  
 @roles('files')
@@ -35,8 +37,8 @@ def del_user(login_asso):
   try:
     sudo('smbldap-userdel %s' % login_asso)
     sudo('rm -R /assos/%s' % login_asso)
-    sudo('rm -R /sites/%s' % login_asso)
-    sudo('rm -R /sites/sessions/%s' % login_asso)
+    sudo('rm -R /var/sites/php/%s' % login_asso)
+    sudo('rm -R /var/sites/sessions/%s' % login_asso)
   except:
     pass
 

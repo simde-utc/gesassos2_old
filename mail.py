@@ -59,7 +59,7 @@ def del_mailings(login_asso):
 @roles('mail')
 def howto_signup(login_president):
   print("envoi du mail au president pour lui dire d'aller signer la charte")
-  to = login_president + "@etu.utc.fr"
+  to = login_president + "@utc.fr"
   msg = """From: SiMDE <simde@assos.utc.fr>
 To: <""" + to + """>
 Subject: Signature de la charte
@@ -67,7 +67,7 @@ Subject: Signature de la charte
 Bonjour,
 
 Pour poursuivre la creation de ton compte asso, merci de signer la charte informatique en suivant la procedure suivante :
-http://assos.utc.fr/simde/wiki/signaturecharte
+https://assos.utc.fr/simde/wiki/signaturecharte
 
 Une fois cela fait, elle doit etre validee par le BDE, il faut donc le contacter a cette adresse pour faire la demande :
 bde@assos.utc.fr
@@ -81,7 +81,7 @@ L'equipe du SiMDE
 @roles('mail')
 def send_passwords(login_asso, login_president, mdp1, mdp2):
   print('Envoi des passwords au president de l\'asso')
-  to = login_president + "@etu.utc.fr"
+  to = login_president + "@utc.fr"
   msg = """From: SiMDE <simde@assos.utc.fr>
 To: <""" + to + """>
 Subject: Creation du compte asso
@@ -95,7 +95,7 @@ Voici les mots de passe associes :
  - base de donnee MySQL : """ + mdp2 + """
 
 Toutes les informations relatives a l'utilisation du compte sont disponibles sur notre wiki :
-http://assos.utc.fr/simde
+https://assos.utc.fr/wiki
 
 Cordialement,
 L'equipe du SiMDE
@@ -118,7 +118,7 @@ Le mot de passe du compte asso """ + login_asso + """ vient d'etre change.
 Voici le nouveau mot de passe : """ + mdp + """
 
 Toutes les informations relatives a l'utilisation du compte sont disponibles sur notre wiki :
-http://assos.utc.fr/simde
+https://assos.utc.fr/wiki
 
 Cordialement,
 L'equipe du SiMDE

@@ -10,4 +10,14 @@ env.config = {
     'password': ''  
   }
 }
+env.roledefs = {
+  'front': [''],
+  'php': [''],
+  'files': [''],
+  'mail': [''],
+  'sql': [''],
+  'node': [''],
+  'python': [''],
+}
+
 
